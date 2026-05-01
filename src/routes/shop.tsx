@@ -124,7 +124,7 @@ function Shop() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12 md:py-20">
+    <div className="max-w-7xl mx-auto px-6 pt-48 pb-20">
       <div className="mb-16 border-b border-border pb-10">
         <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">
           <Link to="/" className="hover:text-primary">Index</Link>
