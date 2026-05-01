@@ -94,7 +94,9 @@ function Hero() {
           <div className="relative grid grid-cols-2 gap-4 p-6">
             {products.slice(0, 4).map((p, i) => (
               <div key={p.id} className="bg-white rounded-2xl p-3 shadow-glow rotate-[var(--r)]" style={{ ["--r" as any]: `${(i % 2 === 0 ? -2 : 2)}deg` }}>
-                <div className="aspect-square rounded-xl flex items-center justify-center text-white text-3xl font-extrabold mb-2" style={{ background: p.bg }}>{p.initials}</div>
+                <div className="aspect-square rounded-xl overflow-hidden mb-2 bg-muted">
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                </div>
                 <div className="text-xs font-semibold text-foreground truncate">{p.name}</div>
                 <div className="text-sm font-extrabold text-primary">{formatKsh(p.price)}</div>
               </div>

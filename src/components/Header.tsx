@@ -64,7 +64,7 @@ export function Header() {
                       onMouseDown={() => { navigate({ to: "/product/$id", params: { id: p.id } }); setQ(""); setOpen(false); }}
                       className="w-full flex items-center gap-3 p-3 hover:bg-muted text-left transition-colors"
                     >
-                      <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs" style={{ background: p.bg }}>{p.initials}</div>
+                      <img src={p.image} alt={p.name} className="w-10 h-10 rounded-lg object-cover" />
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-semibold truncate">{p.name}</div>
                         <div className="text-xs text-muted-foreground">{formatKsh(p.price)}</div>
@@ -109,7 +109,7 @@ export function Header() {
                   <button key={p.id}
                     onClick={() => { navigate({ to: "/product/$id", params: { id: p.id } }); setQ(""); setOpen(false); }}
                     className="w-full flex items-center gap-3 p-3 hover:bg-muted text-left">
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs" style={{ background: p.bg }}>{p.initials}</div>
+                    <img src={p.image} alt={p.name} className="w-10 h-10 rounded-lg object-cover" />
                     <div className="flex-1"><div className="text-sm font-semibold truncate">{p.name}</div><div className="text-xs text-muted-foreground">{formatKsh(p.price)}</div></div>
                   </button>
                 ))}
