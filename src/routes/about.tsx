@@ -4,8 +4,8 @@ import { Shield, Target, MapPin, Users, Package, Calendar, Globe } from "lucide-
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "Corporate Overview — Bizpoa Online Supermarket" },
-      { name: "description", content: "Learn about Bizpoa's commitment to quality, efficiency, and the professionalization of the online supermarket experience in Kenya." },
+      { title: "Corporate Overview — IOMBiz Online Supermarket" },
+      { name: "description", content: "Learn about IOMBiz's commitment to quality, efficiency, and the professionalization of the online supermarket experience in Kenya." },
     ],
   }),
   component: About,
@@ -25,7 +25,7 @@ const stats = [
 function About() {
   return (
     <div className="bg-background">
-      <section className="relative bg-primary text-white pt-48 pb-32 overflow-hidden">
+      <section className="relative bg-primary text-white pt-32 pb-32 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent opacity-50"/>
         </div>
@@ -35,7 +35,7 @@ function About() {
             Advancing Retail <br/>Through Professionalism
           </h1>
           <p className="text-lg text-white/60 max-w-2xl mx-auto font-light leading-relaxed">
-            Bizpoa is a premier online supermarket corporation dedicated to providing high-efficiency procurement solutions for the modern Kenyan household.
+            IOMBiz is a premier online supermarket corporation dedicated to providing high-efficiency procurement solutions for the modern Kenyan household.
           </p>
         </div>
       </section>
@@ -57,7 +57,7 @@ function About() {
           <h2 className="text-4xl font-bold uppercase tracking-tighter mb-8">Corporate History & Strategic Mission</h2>
           <div className="space-y-6 text-muted-foreground leading-relaxed font-light text-base">
             <p>
-              Founded in 2024, Bizpoa emerged from a necessity to professionalize the fragmented digital retail landscape in Nairobi. Our primary focus is the elimination of logistical friction and the standardization of quality in the household essentials market.
+              Founded in 2024, IOMBiz emerged from a necessity to professionalize the fragmented digital retail landscape in Nairobi. Our primary focus is the elimination of logistical friction and the standardization of quality in the household essentials market.
             </p>
             <p>
               We operate a high-efficiency distribution network that leverages advanced digital interfaces to connect consumers directly with a professionally managed inventory collection. Our commitment is to reliability, transparency, and the highest standards of retail excellence.
@@ -107,7 +107,7 @@ function About() {
         <div className="bg-primary p-12 md:p-24 text-center text-white relative overflow-hidden">
           <div className="relative z-10">
             <h3 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter mb-8">Establish a Corporate Account</h3>
-            <p className="text-white/60 mb-12 max-w-xl mx-auto font-light">Join thousands of households and corporations that rely on Bizpoa for their procurement needs. Quality and reliability, guaranteed.</p>
+            <p className="text-white/60 mb-12 max-w-xl mx-auto font-light">Join thousands of households and corporations that rely on IOMBiz for their procurement needs. Quality and reliability, guaranteed.</p>
             <Link to="/shop" className="inline-flex h-16 px-12 bg-white text-primary font-bold uppercase tracking-widest text-xs items-center hover:bg-secondary transition-colors">
               Access Inventory Collection
             </Link>
@@ -116,4 +116,4 @@ function About() {
       </section>
     </div>
   );
-}
+}

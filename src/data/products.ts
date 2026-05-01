@@ -28,13 +28,37 @@ export const categories = [
 const initials = (n: string) =>
   n.split(" ").slice(0, 2).map(w => w[0]).join("").toUpperCase();
 
+const u = (id: string) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=80&w=600`;
+
+const IMGS: Record<string, string[]> = {
+  "Fresh Produce":       [u("1560806887-1e4cd0b6cbd6"), u("1571771894821-ce9b6c11b08e"), u("1523049673857-eb18f1d7b578"), u("1576045057995-568f588f82fb")],
+  "Dairy & Eggs":        [u("1550583724-b2692b85b150"), u("1488477181946-6428a0291777"), u("1486297678162-eb2a19b0a32d"), u("1482049016688-2d3e1b311543")],
+  "Bakery":              [u("1509440159596-0249088772ff"), u("1555507036-ab1f4038808a"), u("1558961363-fa8fdf82db35")],
+  "Meat & Poultry":      [u("1546964124-0cce460f38ef"), u("1604503468506-a8da13d11d36"), u("1544025162-d76694265947")],
+  "Pantry Essentials":   [u("1474979266404-7eaacbcd87c5"), u("1536304929831-ee1ca9d44906"), u("1518110925495-5fe2fda0442c"), u("1587049352846-4a222e784d38"), u("1559181567-c3190ca9959b"), u("1495474472287-4d71bcdd2085")],
+  "Beverages":           [u("1548839140-29a749e1cf4d"), u("1544813546-697593bb3146"), u("1551269901-5c2b09e32600"), u("1495474472287-4d71bcdd2085")],
+  "Household & Cleaning":[u("1584515933487-779824d29309"), u("1585952001688-f0c72f18ec76"), u("1558980664-769d59546b3d"), u("1584622650139-3987d9120a2d")],
+  "Personal Care":       [u("1556228578-8c89e6adf883"), u("1607613009820-a29f7bb81c04"), u("1598440947516-1691c8bbf7c5"), u("1584483766114-2cea6facdf57")],
+  "Baby Products":       [u("1544126592-807ade215a0b"), u("1515488042361-ee00e0ddd4e4"), u("1519689680058-324335573cf0")],
+  "Electronics":         [u("1505740420928-5e560c06d30e"), u("1590658268037-6bf12165a8df"), u("1527443224154-c4a3942d3acf"), u("1609091839311-d5365f9ff1c5"), u("1608478516-5e2b58d27ae6")],
+  "Pets":                [u("1568640347023-a616a30bc3bd"), u("1514888286974-6c03e2ca1dba"), u("1535670567-93ae33479445")],
+};
+
+const catIdx: Record<string, number> = {};
+const img = (category: string) => {
+  const pool = IMGS[category] ?? IMGS["Fresh Produce"];
+  const i = catIdx[category] ?? 0;
+  catIdx[category] = (i + 1) % pool.length;
+  return pool[i];
+};
+
 const make = (
   id: string, name: string, price: number, category: string,
   rating: number, reviews: number, description: string,
   flags: { isNew?: boolean; isFlash?: boolean } = {}
 ): Product => ({
   id, name, price, category, rating, reviews, description,
-  initials: initials(name), image: `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=80&w=400`, ...flags,
+  initials: initials(name), image: img(category), ...flags,
 });
 
 export const products: Product[] = [
@@ -116,7 +140,7 @@ export const formatKsh = (n: number) =>
 export const WHATSAPP_NUMBER = "254700000000";
 
 export const buyOnWhatsApp = (productName: string, price: number) => {
-  const msg = `Hi Bizpoa! I want to buy ${productName} - KSh ${price.toLocaleString("en-KE")}. Is it available?`;
+  const msg = `Hi IOMBiz! I want to buy ${productName} - KSh ${price.toLocaleString("en-KE")}. Is it available?`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
 };
 
@@ -127,6 +151,6 @@ export const checkoutCartOnWhatsApp = (
   const lines = items.map(i => `• ${i.name} x${i.quantity} - KSh ${(i.price * i.quantity).toLocaleString("en-KE")}`);
   const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
   const total = subtotal + delivery;
-  const msg = `Hi Bizpoa Team! I'd like to place an order:\n\n${lines.join("\n")}\n\nSubtotal: KSh ${subtotal.toLocaleString("en-KE")}\nDelivery: KSh ${delivery}\nTotal: KSh ${total.toLocaleString("en-KE")}\n\nPlease confirm availability and delivery time. Thank you!`;
+  const msg = `Hi IOMBiz Team! I'd like to place an order:\n\n${lines.join("\n")}\n\nSubtotal: KSh ${subtotal.toLocaleString("en-KE")}\nDelivery: KSh ${delivery}\nTotal: KSh ${total.toLocaleString("en-KE")}\n\nPlease confirm availability and delivery time. Thank you!`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
-};
+};

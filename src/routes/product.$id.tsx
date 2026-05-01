@@ -10,7 +10,7 @@ export const Route = createFileRoute("/product/$id")({
     const p = products.find(x => x.id === params.id);
     return {
       meta: [
-        { title: p ? `${p.name} — Bizpoa Online Supermarket` : "Product — Bizpoa" },
+        { title: p ? `${p.name} — IOMBiz Online Supermarket` : "Product — IOMBiz" },
         { name: "description", content: p?.description ?? "Premium goods for the modern household." },
       ],
     };
@@ -43,7 +43,7 @@ function ProductPage() {
   const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12 md:py-20">
+    <div className="max-w-7xl mx-auto px-6 pt-32 pb-20">
       <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-12">
         <Link to="/" className="hover:text-primary">Index</Link>
         <ChevronRight className="w-3 h-3"/>
@@ -146,4 +146,4 @@ function ProductPage() {
       )}
     </div>
   );
-}
+}

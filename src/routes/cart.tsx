@@ -6,7 +6,7 @@ import { formatKsh, checkoutCartOnWhatsApp } from "@/data/products";
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Inventory Reserve — Bizpoa Online Supermarket" },
+      { title: "Inventory Reserve — IOMBiz Online Supermarket" },
       { name: "description", content: "Review your inventory selection and finalize your corporate order." },
     ],
   }),
@@ -100,4 +100,4 @@ function Cart() {
       )}
     </div>
   );
-}
+}

@@ -1,72 +1,84 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as Icons from "lucide-react";
-import { ArrowRight, Truck, ShieldCheck, CreditCard, ChevronRight, Star, Play, X } from "lucide-react";
+import { ArrowRight, Truck, ShieldCheck, CreditCard, ChevronRight, Star, Search, ShoppingCart, Package } from "lucide-react";
 import { products, categories, formatKsh } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Bizpoa — The Professional Online Supermarket" },
+      { title: "IOMBiz — The Professional Online Supermarket" },
       { name: "description", content: "Quality household essentials delivered with professionalism. Experience the new standard in Kenyan online shopping." },
     ],
   }),
   component: Index,
 });
 
+const SLIDES = [
+  "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=2000",
+  "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=2000",
+  "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&q=80&w=2000",
+  "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=2000",
+  "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?auto=format&fit=crop&q=80&w=2000",
+  "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&q=80&w=2000",
+  "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&q=80&w=2000",
+  "https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?auto=format&fit=crop&q=80&w=2000",
+  "https://images.unsplash.com/photo-1506617420156-8e4536971650?auto=format&fit=crop&q=80&w=2000",
+  "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&q=80&w=2000",
+];
+
 function Hero() {
-  const [showVideo, setShowVideo] = useState(false);
-  
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setSlide(s => (s + 1) % SLIDES.length), 4000);
+    return () => clearInterval(t);
+  }, []);
+
   return (
-    <section className="relative pt-48 pb-20 px-6 min-h-[90vh] flex flex-col justify-center">
+    <section className="relative pt-32 pb-20 px-6 min-h-[90vh] flex flex-col justify-center">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-12 gap-8">
-          {/* Main Hero Card */}
-          <div className="lg:col-span-8 glass rounded-[2.5rem] overflow-hidden relative min-h-[500px] flex items-end p-12 border border-white/50 shadow-2xl group animate-fade-up">
-            <div className="absolute inset-0 -z-10 transition-transform duration-1000 group-hover:scale-110">
-              <img 
-                src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=2000" 
-                alt="Premium Grocery" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            </div>
-            <div className="max-w-xl">
-              <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-8 italic uppercase">
+          {/* Main Hero Card — Slideshow */}
+          <div className="lg:col-span-8 glass rounded-[2.5rem] overflow-hidden relative min-h-[520px] flex items-end p-12 border border-white/50 shadow-2xl animate-fade-up">
+            {/* Slides */}
+            {SLIDES.map((src, i) => (
+              <div
+                key={i}
+                className="absolute inset-0 transition-opacity duration-1000"
+                style={{ opacity: i === slide ? 1 : 0, zIndex: i === slide ? 0 : -1 }}
+              >
+                <img src={src} alt="" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+              </div>
+            ))}
+
+            {/* Content */}
+            <div className="relative z-10 max-w-xl">
+              <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-6 italic uppercase">
                 The New <br/> Standard.
               </h1>
-              <p className="text-lg text-white/80 mb-10 leading-relaxed font-light">
+              <p className="text-base text-white/80 mb-10 leading-relaxed font-light max-w-md">
                 IOMBiz is the definitive professional supermarket for the modern household. Engineered for speed, curated for excellence.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Link to="/shop" className="h-16 px-12 glass rounded-full text-white font-bold uppercase text-xs tracking-[0.2em] flex items-center gap-3 hover:bg-white hover:text-primary transition-all group">
-                  Enter Catalog <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform"/>
-                </Link>
-                <button onClick={() => setShowVideo(true)} className="w-16 h-16 glass rounded-full text-white flex items-center justify-center hover:bg-white hover:text-primary transition-all">
-                  <Play className="w-5 h-5 fill-current ml-1"/>
-                </button>
-              </div>
+              <Link to="/shop" className="h-14 px-10 glass rounded-full text-white font-bold uppercase text-xs tracking-[0.2em] flex items-center gap-3 w-fit hover:bg-white hover:text-primary transition-all group">
+                Enter Catalog <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform"/>
+              </Link>
+            </div>
+
+            {/* Dot indicators */}
+            <div className="absolute bottom-6 right-8 flex gap-2 z-10">
+              {SLIDES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSlide(i)}
+                  className={`rounded-full transition-all duration-300 ${i === slide ? "w-6 h-2 bg-white" : "w-2 h-2 bg-white/40 hover:bg-white/70"}`}
+                />
+              ))}
             </div>
           </div>
-
-          {showVideo && (
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-20">
-              <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" onClick={() => setShowVideo(false)} />
-              <div className="relative w-full max-w-5xl aspect-video glass rounded-[2rem] overflow-hidden border border-white/20 shadow-2xl animate-zoom-in">
-                <button onClick={() => setShowVideo(false)} className="absolute top-6 right-6 w-12 h-12 glass rounded-full flex items-center justify-center text-white z-10 hover:bg-white hover:text-black transition-all">
-                  <X className="w-5 h-5"/>
-                </button>
-                <video 
-                  src="https://assets.mixkit.co/videos/preview/mixkit-supermarket-aisle-at-night-42588-large.mp4" 
-                  autoPlay 
-                  controls 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          )}
 
           {/* How It Works — Process Flow Card */}
           <div className="lg:col-span-4 animate-fade-up" style={{ animationDelay: "150ms" }}>
@@ -80,25 +92,25 @@ function Hero() {
                 {[
                   {
                     step: "01",
-                    icon: "🗂️",
+                    Icon: Search,
                     title: "Browse the Matrix",
                     desc: "Explore our verified inventory across all departments, sorted by quality tier.",
                   },
                   {
                     step: "02",
-                    icon: "🎯",
+                    Icon: ShoppingCart,
                     title: "Select Your Units",
                     desc: "Reserve confirmed items with a single click or source anything via WhatsApp.",
                   },
                   {
                     step: "03",
-                    icon: "📦",
+                    Icon: Package,
                     title: "Corporate Fulfillment",
                     desc: "Your order enters our logistics matrix for same-day regional dispatch.",
                   },
                   {
                     step: "04",
-                    icon: "🚀",
+                    Icon: Truck,
                     title: "Delivered to Door",
                     desc: "Tracked, verified, and delivered with enterprise-grade precision.",
                   },
@@ -110,12 +122,12 @@ function Hero() {
                     )}
                     {/* Step circle */}
                     <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:border-primary transition-all duration-300 z-10">
-                      <span className="text-[10px] font-black text-primary group-hover:text-white transition-colors">{s.step}</span>
+                      <s.Icon className="w-4 h-4 text-primary group-hover:text-white transition-colors" strokeWidth={2}/>
                     </div>
                     {/* Content */}
                     <div className="pb-5">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-base">{s.icon}</span>
+                        <span className="text-[9px] font-black text-primary tracking-widest">{s.step}</span>
                         <div className="text-[11px] font-black uppercase tracking-wider">{s.title}</div>
                       </div>
                       <p className="text-[10px] text-muted-foreground leading-relaxed font-medium">{s.desc}</p>

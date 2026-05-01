@@ -12,7 +12,7 @@ export function FloatingButtons() {
   return (
     <>
       <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi Bizpoa Support! I have an inquiry regarding your inventory.")}`}
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi IOMBiz Support! I have an inquiry regarding your inventory.")}`}
         target="_blank" rel="noreferrer"
         className="fixed bottom-8 right-8 z-50 w-16 h-16 bg-whatsapp text-white flex items-center justify-center shadow-2xl hover:scale-105 transition-all border-4 border-white"
         aria-label="Corporate Support"

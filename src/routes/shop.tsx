@@ -14,7 +14,7 @@ export const Route = createFileRoute("/shop")({
   validateSearch: (search) => shopSearchSchema.parse(search),
   head: () => ({
     meta: [
-      { title: "Catalog — Bizpoa Online Supermarket" },
+      { title: "Catalog — IOMBiz Online Supermarket" },
       { name: "description", content: "Explore our professionally curated selection of premium supermarket essentials. Quality guaranteed." },
     ],
   }),
@@ -124,7 +124,7 @@ function Shop() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-6 pt-48 pb-20">
+    <div className="max-w-7xl mx-auto px-6 pt-32 pb-20">
       <div className="mb-16 border-b border-border pb-10">
         <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">
           <Link to="/" className="hover:text-primary">Index</Link>
@@ -133,7 +133,7 @@ function Shop() {
         </div>
         <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter">Unit Inventory Directory</h1>
         <p className="text-muted-foreground text-sm mt-6 font-light max-w-2xl leading-relaxed">
-          The Bizpoa Corporate Catalog provides a comprehensive overview of our current stock. Each unit is tracked and verified for quality assurance and logistical efficiency.
+          The IOMBiz Corporate Catalog provides a comprehensive overview of our current stock. Each unit is tracked and verified for quality assurance and logistical efficiency.
         </p>
       </div>
 
@@ -198,4 +198,4 @@ function Shop() {
     </div>
   );
 }
-
+
