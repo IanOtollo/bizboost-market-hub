@@ -81,6 +81,8 @@ function Shop() {
     setMinRating(0); 
     setPage(1); 
     navigate({ search: {}, replace: true });
+  };
+
   const Sidebar = (
     <aside className="space-y-10">
       <div className="glass p-6 rounded-[1.5rem] border border-white/20">
