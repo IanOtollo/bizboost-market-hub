@@ -55,9 +55,11 @@ export function Header() {
                   className="w-full h-12 pl-12 pr-4 border border-border bg-secondary/30 focus:bg-white focus:border-primary outline-none text-xs font-medium transition-all"
                 />
               </div>
-              {open && results.length > 0 && (
+              {open && q.trim().length > 0 && (
                 <div className="absolute top-full mt-px left-0 right-0 bg-white border border-border shadow-2xl overflow-hidden z-50">
-                  <div className="p-2 bg-secondary/30 text-[9px] uppercase tracking-widest font-bold text-muted-foreground border-b border-border">Matching Units</div>
+                  <div className="p-2 bg-secondary/30 text-[9px] uppercase tracking-widest font-bold text-muted-foreground border-b border-border">
+                    {results.length > 0 ? "Matching Units" : "No direct matches found"}
+                  </div>
                   {results.map(p => (
                     <button
                       key={p.id}
@@ -71,10 +73,28 @@ export function Header() {
                       </div>
                     </button>
                   ))}
-                  <button 
-                    onMouseDown={() => navigate({ to: "/shop" })}
-                    className="w-full p-3 text-[9px] uppercase tracking-[0.2em] font-bold text-center bg-primary text-white hover:bg-primary/90"
-                  >View All Inventory</button>
+                  
+                  {results.length === 0 && (
+                    <div className="p-6 text-center bg-background">
+                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 leading-relaxed">
+                        The requested item is not currently in our digital catalog.
+                      </p>
+                      <a 
+                        href={`https://wa.me/254700000000?text=${encodeURIComponent(`Corporate Inquiry: I am looking for "${q}". Is this unit available in your physical inventory?`)}`}
+                        target="_blank" rel="noreferrer"
+                        className="inline-block w-full p-3 text-[9px] uppercase tracking-[0.2em] font-bold bg-primary text-white hover:bg-primary/90 transition-colors"
+                      >
+                        Request Unit via WhatsApp
+                      </a>
+                    </div>
+                  )}
+
+                  {results.length > 0 && (
+                    <button 
+                      onMouseDown={() => navigate({ to: "/shop" })}
+                      className="w-full p-3 text-[9px] uppercase tracking-[0.2em] font-bold text-center bg-primary text-white hover:bg-primary/90"
+                    >View All Inventory</button>
+                  )}
                 </div>
               )}
             </div>
@@ -103,6 +123,37 @@ export function Header() {
                   placeholder="Search Inventory..."
                   className="w-full h-12 pl-12 pr-4 border border-border bg-secondary/30 outline-none text-xs"
                 />
+                {open && q.trim().length > 0 && (
+                  <div className="absolute top-full mt-px left-0 right-0 bg-white border border-border shadow-2xl overflow-hidden z-50">
+                    <div className="p-2 bg-secondary/30 text-[9px] uppercase tracking-widest font-bold text-muted-foreground border-b border-border">
+                      {results.length > 0 ? "Matching Units" : "No direct matches found"}
+                    </div>
+                    {results.map(p => (
+                      <button
+                        key={p.id}
+                        onClick={() => { navigate({ to: "/product/$id", params: { id: p.id } }); setQ(""); setOpen(false); setMenu(false); }}
+                        className="w-full flex items-center gap-4 p-4 hover:bg-secondary transition-colors text-left border-b border-border/50 last:border-0"
+                      >
+                        <img src={p.image} alt={p.name} className="w-12 h-12 object-cover border border-border" />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs font-bold uppercase tracking-tight truncate">{p.name}</div>
+                          <div className="text-[10px] text-primary font-bold mt-1 tracking-wider">{formatKsh(p.price)}</div>
+                        </div>
+                      </button>
+                    ))}
+                    {results.length === 0 && (
+                      <div className="p-6 text-center bg-background">
+                        <a 
+                          href={`https://wa.me/254700000000?text=${encodeURIComponent(`Corporate Inquiry: I am looking for "${q}". Is this unit available in your physical inventory?`)}`}
+                          target="_blank" rel="noreferrer"
+                          className="inline-block w-full p-3 text-[9px] uppercase tracking-[0.2em] font-bold bg-primary text-white"
+                        >
+                          Request Unit via WhatsApp
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
               {nav.map(n => (
                 <Link key={n.to} to={n.to} onClick={() => setMenu(false)}

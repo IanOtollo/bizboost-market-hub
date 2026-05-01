@@ -60,36 +60,54 @@ export const products: Product[] = [
   make("1604908176997-125f2527c356", "Fresh Chicken Breast (1kg)", 750, "Meat & Poultry", 4.7, 189, "Skinless, boneless fresh chicken breast."),
   make("1544025162-d76694265947", "Premium Pork Chops (500g)", 680, "Meat & Poultry", 4.6, 67, "High-quality center-cut pork chops."),
   
-  // Pantry Essentials
+  // Pantry Essentials (continued)
   make("1586201375745-f60aff44465b", "Extra Virgin Olive Oil 1L", 1250, "Pantry Essentials", 4.9, 312, "Cold-pressed extra virgin olive oil from Spain."),
   make("1599940824399-4258e756c3ef", "Basmati Rice 5kg", 1850, "Pantry Essentials", 4.8, 456, "Long-grain, aromatic aged Basmati rice."),
   make("1589985270826-4403070bc96a", "Premium Sea Salt 500g", 180, "Pantry Essentials", 4.7, 88, "Natural sea salt crystals for gourmet seasoning."),
   make("1510627489325-3007ec1031c1", "Organic Honey 500g", 650, "Pantry Essentials", 4.9, 215, "Pure, unfiltered wildflower honey."),
-  
-  // Beverages
+  make("1610967327702-86927429676e", "Self-Rising Wheat Flour 2kg", 220, "Pantry Essentials", 4.8, 120, "Premium wheat flour perfect for baking cakes and pastries."),
+  make("1624462719234-8025e8944e42", "Refined White Sugar 2kg", 310, "Pantry Essentials", 4.7, 340, "Pure refined sugar for all your sweetening needs."),
+  make("1612193671239-01ee7cc50e68", "Black Tea Bags (100pk)", 250, "Pantry Essentials", 4.9, 560, "Strong, aromatic black tea from the Kenyan highlands."),
+  make("1608613307612-ba25e5e709b4", "Instant Coffee Gold 200g", 1450, "Pantry Essentials", 4.8, 230, "Premium freeze-dried instant coffee for a rich aroma."),
+
+  // Beverages (continued)
   make("1544813546-697593bb3146", "Sparkling Water 1.5L", 120, "Beverages", 4.5, 340, "Crisp, refreshing sparkling mineral water."),
   make("1625082590740-9dc1005a9648", "Fresh Orange Juice 1L", 320, "Beverages", 4.7, 128, "100% pure squeezed orange juice, no added sugar."),
   make("1594631252811-f58a4c30c33a", "Premium Roast Coffee 250g", 1100, "Beverages", 4.9, 187, "Dark roast Arabica coffee beans, medium grind."),
-  
-  // Household & Cleaning
+  make("1587334274328-2283a246a447", "Apple & Mango Juice 2L", 450, "Beverages", 4.7, 89, "Refreshing fruit juice blend from concentrate."),
+  make("1610967327702-86927429676d", "Still Mineral Water 5L", 250, "Beverages", 4.9, 450, "Pure volcanic mineral water in an eco-friendly jug."),
+
+  // Household & Cleaning (continued)
   make("1584622650139-3987d9120a2d", "Eco-Friendly Dish Soap", 280, "Household & Cleaning", 4.6, 142, "Plant-based, biodegradable dishwashing liquid."),
   make("1585314062331-1d52847ffad1", "Ultra Soft Toilet Paper (12pk)", 750, "Household & Cleaning", 4.8, 567, "Premium 3-ply toilet paper, soft and strong."),
   make("1608613307612-ba25e5e709b4", "Multi-Surface Cleaner 750ml", 450, "Household & Cleaning", 4.7, 231, "Effective antibacterial cleaner for all surfaces."),
-  
-  // Personal Care
+  make("1624462719234-8025e8944e43", "Laundry Detergent Gel 3L", 1250, "Household & Cleaning", 4.8, 312, "Advanced stain removal formula for all fabric types."),
+  make("1610967327702-86927429676a", "Microfiber Cleaning Cloths (5pk)", 650, "Household & Cleaning", 4.9, 150, "Ultra-absorbent cloths for scratch-free cleaning."),
+
+  // Personal Care (continued)
   make("1559591933941-ed574220b5aa", "Natural Body Wash 500ml", 580, "Personal Care", 4.7, 167, "Sulfate-free body wash with essential oils."),
   make("1598440997627-750588944e42", "Whitening Toothpaste 100g", 250, "Personal Care", 4.6, 421, "Advanced whitening formula with fluoride."),
   make("1620916566854-2a67e56a4220", "Gentle Face Cleanser", 850, "Personal Care", 4.8, 112, "Dermatologist-tested cleanser for sensitive skin."),
-  
-  // Baby Products
+  make("1610967327702-86927429676b", "Antiseptic Hand Sanitizer 500ml", 450, "Personal Care", 4.9, 890, "75% alcohol formula for professional hygiene."),
+  make("1608613307612-ba25e5e709b5", "Moisturizing Sunscreen SPF 50", 1850, "Personal Care", 4.8, 230, "Broad-spectrum protection for active lifestyles."),
+
+  // Baby Products (continued)
   make("1594411130704-586739f76a3e", "Sensitive Baby Wipes (80pk)", 320, "Baby Products", 4.8, 890, "Fragrance-free wipes for delicate baby skin."),
   make("1603314944439-ef51207f272a", "Premium Baby Diapers (Size 3)", 1850, "Baby Products", 4.7, 1245, "Ultra-absorbent diapers with leak protection."),
   make("1612193671239-01ee7cc50e68", "Organic Baby Food Jar", 180, "Baby Products", 4.6, 312, "Smooth fruit puree for babies 6 months+."),
-  
-  // Electronics
+  make("1624462719234-8025e8944e44", "Baby Milk Formula (Stage 1)", 2450, "Baby Products", 4.9, 450, "Nutrient-dense formula for infants 0-6 months."),
+
+  // Electronics (continued)
   make("1511704953440-410bc3bc1944", "Fast Wireless Charger", 1200, "Electronics", 4.6, 345, "15W fast wireless charging pad for all devices."),
   make("1523275335640-470b4a838320", "Bluetooth Earbuds", 3500, "Electronics", 4.5, 678, "Compact earbuds with crystal clear sound quality."),
   make("1588872626084-257a3a5df555", "Portable Power Bank 10k mAh", 2800, "Electronics", 4.7, 156, "High-capacity power bank with dual USB ports."),
+  make("1610967327702-86927429676c", "Ultra-Wide Smart Monitor 34\"", 45000, "Electronics", 4.9, 45, "Professional-grade curved monitor for productivity."),
+  make("1608613307612-ba25e5e709b6", "Noise Cancelling Headphones", 12500, "Electronics", 4.8, 120, "Premium active noise cancellation for focus."),
+
+  // Pets
+  make("1544391444-99882a170530", "Adult Dog Food 10kg", 3200, "Pets", 4.8, 450, "Nutritionally balanced kibble for active adult dogs."),
+  make("1514894780513-3115ee0181ad", "Premium Cat Litter 5kg", 850, "Pets", 4.7, 230, "Low-dust, high-clumping natural clay litter."),
+  make("1535670567-93ae33479445", "Tuna Cat Treats (50g)", 250, "Pets", 4.9, 120, "Delicious grain-free treats for happy cats."),
 ];
 
 export const formatKsh = (n: number) =>
