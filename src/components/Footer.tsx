@@ -39,7 +39,7 @@ export function Footer() {
           <ul className="space-y-2.5 text-sm text-white/80">
             <li className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 shrink-0"/> Nairobi CBD, Kenya</li>
             <li className="flex items-center gap-2"><Phone className="w-4 h-4"/> +254 700 000 000</li>
-            <li className="flex items-center gap-2"><Mail className="w-4 h-4"/> hello@bizboost.co.ke</li>
+            <li className="flex items-center gap-2"><Mail className="w-4 h-4"/><span>hello@bizboost.co.ke</span></li>
           </ul>
           <div className="mt-4 inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white text-primary-deep font-bold text-xs shadow-soft">
             <span className="w-6 h-6 rounded-full bg-success flex items-center justify-center text-white text-[10px]">M</span>

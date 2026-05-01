@@ -42,8 +42,9 @@ function Cart() {
             {cart.map(item => (
               <div key={item.product.id} className="bg-card rounded-2xl border border-border shadow-soft p-4 flex gap-4 items-center">
                 <Link to="/product/$id" params={{ id: item.product.id }}
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl flex items-center justify-center text-white font-extrabold text-2xl shrink-0"
-                  style={{ background: item.product.bg }}>{item.product.initials}</Link>
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-card">
+                  <img src={item.product.image} alt={item.product.name} className="w-full h-full object-cover" />
+                </Link>
                 <div className="flex-1 min-w-0">
                   <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">{item.product.category}</div>
                   <Link to="/product/$id" params={{ id: item.product.id }} className="block font-bold text-sm sm:text-base hover:text-primary transition-colors line-clamp-1">{item.product.name}</Link>
