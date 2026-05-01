@@ -1,6 +1,11 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { StoreProvider } from "@/context/StoreContext";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { FloatingButtons } from "@/components/FloatingButtons";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -29,16 +34,19 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "BizBoost Market — Kenya's Freshest Online Store" },
+      { name: "description", content: "Shop everything across Kenya. Pay via WhatsApp. Fast Nairobi delivery, M-PESA accepted." },
+      { name: "author", content: "BizBoost Market" },
+      { property: "og:title", content: "BizBoost Market — Kenya's Freshest Online Store" },
+      { property: "og:description", content: "Shop everything across Kenya. Pay via WhatsApp. Fast Nairobi delivery." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" },
       {
         rel: "stylesheet",
         href: appCss,
@@ -65,5 +73,15 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <StoreProvider>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1"><Outlet /></main>
+        <Footer />
+        <FloatingButtons />
+        <Toaster position="top-center" richColors />
+      </div>
+    </StoreProvider>
+  );
 }
