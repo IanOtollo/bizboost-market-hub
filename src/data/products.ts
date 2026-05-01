@@ -1,3 +1,33 @@
+import p1 from "@/assets/products/p1.png";
+import p2 from "@/assets/products/p2.png";
+import p3 from "@/assets/products/p3.png";
+import p4 from "@/assets/products/p4.png";
+import f1 from "@/assets/products/f1.png";
+import f2 from "@/assets/products/f2.png";
+import f3 from "@/assets/products/f3.png";
+import f4 from "@/assets/products/f4.png";
+import e1 from "@/assets/products/e1.png";
+import e2 from "@/assets/products/e2.png";
+import e3 from "@/assets/products/e3.png";
+import e4 from "@/assets/products/e4.png";
+import b1 from "@/assets/products/b1.png";
+import b2 from "@/assets/products/b2.png";
+import b3 from "@/assets/products/b3.png";
+import b4 from "@/assets/products/b4.png";
+import h1 from "@/assets/products/h1.png";
+import h2 from "@/assets/products/h2.png";
+import h3 from "@/assets/products/h3.png";
+import h4 from "@/assets/products/h4.png";
+import s1 from "@/assets/products/s1.png";
+import s2 from "@/assets/products/s2.png";
+import s3 from "@/assets/products/s3.png";
+import s4 from "@/assets/products/s4.png";
+
+const IMAGES: Record<string, string> = {
+  p1, p2, p3, p4, f1, f2, f3, f4, e1, e2, e3, e4,
+  b1, b2, b3, b4, h1, h2, h3, h4, s1, s2, s3, s4,
+};
+
 export type Product = {
   id: string;
   name: string;
@@ -8,6 +38,7 @@ export type Product = {
   description: string;
   bg: string;
   initials: string;
+  image: string;
   isNew?: boolean;
   isFlash?: boolean;
 };
@@ -32,7 +63,7 @@ const make = (
   flags: { isNew?: boolean; isFlash?: boolean } = {}
 ): Product => ({
   id, name, price, category, rating, reviews, description, bg,
-  initials: initials(name), ...flags,
+  initials: initials(name), image: IMAGES[id], ...flags,
 });
 
 export const products: Product[] = [
