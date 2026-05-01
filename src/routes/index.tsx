@@ -34,10 +34,6 @@ function Hero() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
             </div>
             <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 glass rounded-full text-[10px] uppercase tracking-[0.2em] font-black text-white border-white/30">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                Now Dispatching Regionally
-              </div>
               <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-8 italic uppercase">
                 The New <br/> Standard.
               </h1>
@@ -72,35 +68,65 @@ function Hero() {
             </div>
           )}
 
-          {/* Secondary Bento Cards */}
-          <div className="lg:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
-            <div className="glass rounded-[2.5rem] p-8 border border-white/50 flex flex-col justify-between animate-fade-up shadow-xl" style={{ animationDelay: "100ms" }}>
-              <div className="flex justify-between items-start mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white">
-                  <Truck className="w-5 h-5"/>
-                </div>
-                <div className="text-right">
-                  <div className="text-3xl font-black tracking-tighter text-primary italic">SUB-60M</div>
-                  <div className="text-[9px] uppercase font-bold text-muted-foreground tracking-widest">Global Logistics</div>
-                </div>
+          {/* How It Works — Process Flow Card */}
+          <div className="lg:col-span-4 animate-fade-up" style={{ animationDelay: "150ms" }}>
+            <div className="glass rounded-[2.5rem] p-8 border border-white/50 shadow-2xl h-full flex flex-col justify-between">
+              <div className="mb-6">
+                <div className="text-[9px] uppercase tracking-[0.4em] font-black text-primary mb-2">Corporate Process</div>
+                <h3 className="text-2xl font-black uppercase tracking-tighter italic leading-tight">How IOMBiz Works</h3>
               </div>
-              <div>
-                <h3 className="text-xl font-black uppercase tracking-tighter mb-2">Enterprise Logistics</h3>
-                <p className="text-[11px] text-muted-foreground leading-relaxed font-medium">Our corporate-grade fulfillment network is engineered for record-breaking regional dispatch speeds.</p>
+
+              <div className="flex flex-col gap-1 flex-1">
+                {[
+                  {
+                    step: "01",
+                    icon: "🗂️",
+                    title: "Browse the Matrix",
+                    desc: "Explore our verified inventory across all departments, sorted by quality tier.",
+                  },
+                  {
+                    step: "02",
+                    icon: "🎯",
+                    title: "Select Your Units",
+                    desc: "Reserve confirmed items with a single click or source anything via WhatsApp.",
+                  },
+                  {
+                    step: "03",
+                    icon: "📦",
+                    title: "Corporate Fulfillment",
+                    desc: "Your order enters our logistics matrix for same-day regional dispatch.",
+                  },
+                  {
+                    step: "04",
+                    icon: "🚀",
+                    title: "Delivered to Door",
+                    desc: "Tracked, verified, and delivered with enterprise-grade precision.",
+                  },
+                ].map((s, i) => (
+                  <div key={i} className="flex items-start gap-4 group relative">
+                    {/* Connector line */}
+                    {i < 3 && (
+                      <div className="absolute left-[19px] top-[42px] w-px h-[calc(100%+4px)] bg-gradient-to-b from-primary/30 to-transparent" />
+                    )}
+                    {/* Step circle */}
+                    <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:border-primary transition-all duration-300 z-10">
+                      <span className="text-[10px] font-black text-primary group-hover:text-white transition-colors">{s.step}</span>
+                    </div>
+                    {/* Content */}
+                    <div className="pb-5">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-base">{s.icon}</span>
+                        <div className="text-[11px] font-black uppercase tracking-wider">{s.title}</div>
+                      </div>
+                      <p className="text-[10px] text-muted-foreground leading-relaxed font-medium">{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-            
-            <div className="glass rounded-[2.5rem] p-8 border border-white/50 bg-primary overflow-hidden relative group animate-fade-up shadow-xl" style={{ animationDelay: "200ms" }}>
-              <div className="relative z-10 h-full flex flex-col justify-between min-h-[160px]">
-                <div>
-                  <div className="text-2xl font-black tracking-tighter text-white uppercase italic mb-2 leading-tight">Premium <br/>Curated <br/>Units</div>
-                  <p className="text-[10px] text-white/60 font-bold uppercase tracking-widest">Inventory Excellence</p>
-                </div>
-                <Link to="/shop" className="text-[10px] text-white font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:gap-4 transition-all mt-4">
-                  Access Directory <ArrowRight className="w-4 h-4"/>
-                </Link>
-              </div>
-              <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-white/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000" />
+
+              <Link to="/shop" className="mt-4 w-full h-12 bg-primary text-white rounded-2xl flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] hover:bg-primary/90 transition-all group">
+                Start Shopping <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform"/>
+              </Link>
             </div>
           </div>
         </div>

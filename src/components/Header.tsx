@@ -140,10 +140,12 @@ export function Header() {
                   </div>
                 )}
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {nav.map(n => (
                   <Link key={n.to} to={n.to} onClick={() => setMenu(false)}
-                    className={`p-4 rounded-2xl glass border border-white/20 text-[10px] font-black uppercase tracking-[0.2em] text-center ${path === n.to ? "bg-primary text-white border-primary" : "text-muted-foreground"}`}>
+                    className={`p-6 rounded-2xl glass border border-white/40 text-xs font-black uppercase tracking-[0.2em] text-center shadow-sm transition-all active:scale-95 ${
+                      path === n.to ? "bg-primary text-white border-primary" : "text-foreground bg-white/60"
+                    }`}>
                     {n.label}
                   </Link>
                 ))}
