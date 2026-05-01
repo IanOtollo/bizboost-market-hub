@@ -58,14 +58,15 @@ function ProductPage() {
 
       <div className="grid md:grid-cols-2 gap-10">
         <div>
-          <div className="aspect-square rounded-3xl flex items-center justify-center text-white font-extrabold text-9xl shadow-card relative overflow-hidden" style={{ background: product.bg }}>
-            <span className="drop-shadow-2xl">{product.initials}</span>
+          <div className="aspect-square rounded-3xl shadow-card relative overflow-hidden bg-card">
+            <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
             {product.isFlash && <span className="absolute top-5 left-5 px-3 py-1.5 rounded-full text-xs font-bold uppercase bg-destructive text-white shadow-soft">⚡ Flash Deal</span>}
           </div>
           <div className="grid grid-cols-4 gap-3 mt-4">
             {[0,1,2,3].map(i => (
-              <div key={i} className="aspect-square rounded-xl flex items-center justify-center text-white font-bold opacity-80 hover:opacity-100 cursor-pointer transition-opacity border-2 border-transparent hover:border-primary"
-                style={{ background: product.bg }}>{product.initials}</div>
+              <div key={i} className="aspect-square rounded-xl overflow-hidden opacity-80 hover:opacity-100 cursor-pointer transition-opacity border-2 border-transparent hover:border-primary bg-card">
+                <img src={product.image} alt="" className="w-full h-full object-cover" />
+              </div>
             ))}
           </div>
         </div>

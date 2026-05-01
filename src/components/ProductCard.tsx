@@ -13,9 +13,12 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       style={{ animationDelay: `${index * 40}ms` }}>
       <div className="relative aspect-square overflow-hidden">
         <Link to="/product/$id" params={{ id: product.id }} className="block w-full h-full">
-          <div className="w-full h-full flex items-center justify-center transition-transform duration-500 group-hover:scale-110" style={{ background: product.bg }}>
-            <span className="text-white font-extrabold text-5xl tracking-tight drop-shadow-lg">{product.initials}</span>
-          </div>
+          <img
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
         </Link>
         <div className="absolute top-3 left-3 flex flex-col gap-1.5">
           {product.isFlash && <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide bg-destructive text-white shadow-soft">⚡ Flash</span>}
