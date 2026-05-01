@@ -75,9 +75,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <StoreProvider>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col relative overflow-hidden bg-background">
+        {/* Background Decorative Elements for Glassmorphism Visibility */}
+        <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px] pointer-events-none -z-10" />
+        <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-accent/5 blur-[120px] pointer-events-none -z-10" />
+        
         <Header />
-        <main className="flex-1"><Outlet /></main>
+        <main className="flex-1 relative z-0"><Outlet /></main>
         <Footer />
         <FloatingButtons />
         <Toaster position="top-center" richColors />

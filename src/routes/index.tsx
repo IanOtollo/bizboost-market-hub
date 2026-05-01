@@ -97,7 +97,8 @@ function CategorySection() {
 function FeaturedSection() {
   const featured = products.slice(0, 8);
   return (
-    <section className="bg-secondary/30 py-20">
+    <section className="py-20 relative overflow-hidden">
+      <div className="absolute inset-0 glass -z-10" />
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
