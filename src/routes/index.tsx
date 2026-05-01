@@ -77,13 +77,15 @@ function CategorySection() {
           View Full Directory <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform"/>
         </Link>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-px bg-border border border-border">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
         {categories.map((c, i) => {
           const Icon = (Icons as any)[c.icon] ?? Icons.Package;
           return (
-            <Link key={c.slug} to="/shop" className="bg-background p-8 hover:bg-secondary transition-colors group">
-              <Icon className="w-8 h-8 text-primary mb-6 group-hover:scale-110 transition-transform" strokeWidth={1.5}/>
-              <h3 className="font-bold text-sm uppercase tracking-tight">{c.slug}</h3>
+            <Link key={c.slug} to="/shop" search={{ category: c.slug }} className="glass p-8 rounded-[1.5rem] hover:bg-white/50 transition-all group flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Icon className="w-8 h-8 text-primary" strokeWidth={1.5}/>
+              </div>
+              <h3 className="font-bold text-xs uppercase tracking-[0.1em]">{c.slug}</h3>
             </Link>
           );
         })}

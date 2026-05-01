@@ -9,7 +9,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
   const wished = wishlist.includes(product.id);
 
   return (
-    <div className="group bg-card rounded-none overflow-hidden shadow-soft border border-border/60 transition-all duration-300 hover:shadow-lg animate-fade-up"
+    <div className="group glass rounded-[1.5rem] overflow-hidden shadow-soft border border-white/20 transition-all duration-300 hover:shadow-lg animate-fade-up"
       style={{ animationDelay: `${index * 40}ms` }}>
       <div className="relative aspect-square overflow-hidden bg-secondary/30">
         <Link to="/product/$id" params={{ id: product.id }} className="block w-full h-full">

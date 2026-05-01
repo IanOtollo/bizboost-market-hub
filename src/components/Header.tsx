@@ -29,7 +29,7 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white border-b border-border shadow-sm">
+      <header className="sticky top-0 z-40 glass border-b border-white/20 shadow-sm">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-12 h-20 sm:h-24">
             <Link to="/" className="shrink-0"><Logo /></Link>
@@ -52,7 +52,7 @@ export function Header() {
                   onFocus={() => setOpen(true)}
                   onBlur={() => setTimeout(() => setOpen(false), 200)}
                   placeholder="Search Inventory Collection..."
-                  className="w-full h-12 pl-12 pr-4 border border-border bg-secondary/30 focus:bg-white focus:border-primary outline-none text-xs font-medium transition-all"
+                  className="w-full h-12 pl-12 pr-4 rounded-full border border-border bg-secondary/30 focus:bg-white focus:border-primary outline-none text-xs font-medium transition-all"
                 />
               </div>
               {open && q.trim().length > 0 && (

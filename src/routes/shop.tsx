@@ -1,10 +1,17 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useMemo, useState, useEffect } from "react";
 import { Filter, ChevronDown, Star, X, Check } from "lucide-react";
 import { products, categories } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
+import { z } from "zod";
+
+const shopSearchSchema = z.object({
+  category: z.string().optional().catch(""),
+  sort: z.enum(["newest", "price-low", "price-high", "rating"]).optional().catch("newest"),
+});
 
 export const Route = createFileRoute("/shop")({
+  validateSearch: (search) => shopSearchSchema.parse(search),
   head: () => ({
     meta: [
       { title: "Catalog — Bizpoa Online Supermarket" },
@@ -32,12 +39,25 @@ const PRICE_RANGES: PriceRange[] = [
 ];
 
 function Shop() {
-  const [cat, setCat] = useState<string | null>(null);
+  const { category: searchCat, sort: searchSort } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
+  
+  const [cat, setCat] = useState<string | null>(searchCat || null);
   const [priceRange, setPriceRange] = useState<PriceRange>(PRICE_RANGES[0]);
   const [minRating, setMinRating] = useState(0);
-  const [sort, setSort] = useState<"newest" | "price-low" | "price-high" | "rating">("newest");
+  const [sort, setSort] = useState<"newest" | "price-low" | "price-high" | "rating">(searchSort || "newest");
   const [page, setPage] = useState(1);
   const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    setCat(searchCat || null);
+  }, [searchCat]);
+
+  const updateFilters = (newCat: string | null) => {
+    setCat(newCat);
+    navigate({ search: (old) => ({ ...old, category: newCat || undefined }), replace: true });
+    setPage(1);
+  };
 
   const filtered = useMemo(() => {
     let list = products.filter(p =>
@@ -60,34 +80,33 @@ function Shop() {
     setPriceRange(PRICE_RANGES[0]); 
     setMinRating(0); 
     setPage(1); 
-  };
-
+    navigate({ search: {}, replace: true });
   const Sidebar = (
     <aside className="space-y-10">
-      <div>
-        <h3 className="font-bold text-[10px] mb-5 uppercase tracking-[0.2em] text-primary border-b border-border pb-2">Department Directory</h3>
+      <div className="glass p-6 rounded-[1.5rem] border border-white/20">
+        <h3 className="font-bold text-[10px] mb-5 uppercase tracking-[0.2em] text-primary border-b border-primary/20 pb-2">Department Directory</h3>
         <div className="flex flex-col gap-1">
-          <button onClick={() => { setCat(null); setPage(1); }}
-            className={`text-left px-4 py-2.5 text-[11px] uppercase tracking-widest transition-all ${!cat ? "bg-primary text-white font-bold" : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-secondary"}`}>
+          <button onClick={() => updateFilters(null)}
+            className={`text-left px-4 py-2.5 text-[11px] uppercase tracking-widest transition-all rounded-lg ${!cat ? "bg-primary text-white font-bold" : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-white/50"}`}>
             Total Inventory
           </button>
           {categories.map(c => (
-            <button key={c.slug} onClick={() => { setCat(c.slug); setPage(1); }}
-              className={`text-left px-4 py-2.5 text-[11px] uppercase tracking-widest transition-all ${cat === c.slug ? "bg-primary text-white font-bold" : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-secondary"}`}>
+            <button key={c.slug} onClick={() => updateFilters(c.slug)}
+              className={`text-left px-4 py-2.5 text-[11px] uppercase tracking-widest transition-all rounded-lg ${cat === c.slug ? "bg-primary text-white font-bold" : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-white/50"}`}>
               {c.slug}
             </button>
           ))}
         </div>
       </div>
       
-      <div>
-        <h3 className="font-bold text-[10px] mb-5 uppercase tracking-[0.2em] text-primary border-b border-border pb-2">Financial Tiers</h3>
+      <div className="glass p-6 rounded-[1.5rem] border border-white/20">
+        <h3 className="font-bold text-[10px] mb-5 uppercase tracking-[0.2em] text-primary border-b border-primary/20 pb-2">Financial Tiers</h3>
         <div className="flex flex-col gap-1">
           {PRICE_RANGES.map(range => (
             <button 
               key={range.label} 
               onClick={() => { setPriceRange(range); setPage(1); }}
-              className={`flex items-center justify-between px-4 py-2.5 text-[11px] uppercase tracking-widest transition-all ${priceRange.label === range.label ? "bg-secondary text-primary font-bold border-l-2 border-primary" : "text-muted-foreground hover:text-foreground"}`}
+              className={`flex items-center justify-between px-4 py-2.5 text-[11px] uppercase tracking-widest transition-all rounded-lg ${priceRange.label === range.label ? "bg-primary/10 text-primary font-bold" : "text-muted-foreground hover:text-foreground hover:bg-white/50"}`}
             >
               {range.label}
               {priceRange.label === range.label && <Check className="w-3 h-3"/>}
@@ -96,7 +115,7 @@ function Shop() {
         </div>
       </div>
 
-      <button onClick={reset} className="w-full h-12 bg-white border border-border text-muted-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-primary hover:text-white hover:border-primary transition-all">
+      <button onClick={reset} className="w-full h-12 glass border border-primary/20 text-muted-foreground font-bold text-[10px] uppercase tracking-[0.2em] rounded-full hover:bg-primary hover:text-white transition-all">
         Clear Filter Matrix
       </button>
     </aside>
@@ -116,14 +135,14 @@ function Shop() {
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-[280px_1fr] gap-16">
+      <div className="grid lg:grid-cols-[300px_1fr] gap-16">
         <div className="hidden lg:block">{Sidebar}</div>
         
         {showFilters && (
-          <div className="fixed inset-0 z-50 bg-white lg:hidden p-8 overflow-y-auto">
+          <div className="fixed inset-0 z-50 glass lg:hidden p-8 overflow-y-auto">
             <div className="flex items-center justify-between mb-12">
               <h2 className="font-bold uppercase tracking-widest text-sm">Filter Directory</h2>
-              <button onClick={() => setShowFilters(false)} className="w-10 h-10 flex items-center justify-center border border-border"><X className="w-5 h-5"/></button>
+              <button onClick={() => setShowFilters(false)} className="w-12 h-12 flex items-center justify-center border border-border rounded-full glass"><X className="w-5 h-5"/></button>
             </div>
             {Sidebar}
           </div>
@@ -132,21 +151,21 @@ function Shop() {
         <div>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-12 border-b border-border pb-6">
             <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-muted-foreground">
-              <span className="text-primary">{filtered.length}</span> verified units in current view
+              <span className="text-primary font-black">{filtered.length}</span> verified units in current view
             </div>
             <div className="flex items-center gap-4 w-full sm:w-auto">
-              <button onClick={() => setShowFilters(true)} className="lg:hidden flex-1 h-12 px-6 border border-border text-[10px] uppercase tracking-widest font-bold flex items-center justify-center gap-2">
+              <button onClick={() => setShowFilters(true)} className="lg:hidden flex-1 h-12 px-6 glass border border-border rounded-full text-[10px] uppercase tracking-widest font-bold flex items-center justify-center gap-2">
                 <Filter className="w-3 h-3"/> Refine Search
               </button>
               <div className="relative flex-1 sm:flex-initial">
                 <select value={sort} onChange={e => setSort(e.target.value as any)}
-                  className="appearance-none w-full h-12 pl-6 pr-12 border border-border bg-white text-[10px] uppercase tracking-widest font-bold focus:outline-none focus:border-primary cursor-pointer">
+                  className="appearance-none w-full h-12 pl-6 pr-12 border border-border glass rounded-full text-[10px] uppercase tracking-widest font-bold focus:outline-none focus:border-primary cursor-pointer">
                   <option value="newest">Sequence: Default</option>
                   <option value="price-low">Sequence: Value (Low to High)</option>
                   <option value="price-high">Sequence: Value (High to Low)</option>
                   <option value="rating">Sequence: Customer Index</option>
                 </select>
-                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 pointer-events-none text-muted-foreground"/>
+                <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 w-3 h-3 pointer-events-none text-muted-foreground"/>
               </div>
             </div>
           </div>
