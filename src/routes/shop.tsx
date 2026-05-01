@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Filter, ChevronDown, Star, X } from "lucide-react";
+import { Filter, ChevronDown, Star, X, Check } from "lucide-react";
 import { products, categories } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 
@@ -16,9 +16,24 @@ export const Route = createFileRoute("/shop")({
 
 const PAGE_SIZE = 12;
 
+type PriceRange = {
+  label: string;
+  min: number;
+  max: number;
+};
+
+const PRICE_RANGES: PriceRange[] = [
+  { label: "All Prices", min: 0, max: 1000000 },
+  { label: "Under KSh 500", min: 0, max: 500 },
+  { label: "KSh 500 — KSh 2,000", min: 500, max: 2000 },
+  { label: "KSh 2,000 — KSh 5,000", min: 2000, max: 5000 },
+  { label: "KSh 5,000 — KSh 10,000", min: 5000, max: 10000 },
+  { label: "Over KSh 10,000", min: 10000, max: 1000000 },
+];
+
 function Shop() {
   const [cat, setCat] = useState<string | null>(null);
-  const [maxPrice, setMaxPrice] = useState(10000);
+  const [priceRange, setPriceRange] = useState<PriceRange>(PRICE_RANGES[0]);
   const [minRating, setMinRating] = useState(0);
   const [sort, setSort] = useState<"newest" | "price-low" | "price-high" | "rating">("newest");
   const [page, setPage] = useState(1);
@@ -27,112 +42,133 @@ function Shop() {
   const filtered = useMemo(() => {
     let list = products.filter(p =>
       (!cat || p.category === cat) &&
-      p.price <= maxPrice &&
+      p.price >= priceRange.min &&
+      p.price <= priceRange.max &&
       p.rating >= minRating
     );
     if (sort === "price-low") list = [...list].sort((a, b) => a.price - b.price);
     else if (sort === "price-high") list = [...list].sort((a, b) => b.price - a.price);
     else if (sort === "rating") list = [...list].sort((a, b) => b.rating - a.rating);
     return list;
-  }, [cat, maxPrice, minRating, sort]);
+  }, [cat, priceRange, minRating, sort]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const paged = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
-  const reset = () => { setCat(null); setMaxPrice(10000); setMinRating(0); setPage(1); };
+  const reset = () => { 
+    setCat(null); 
+    setPriceRange(PRICE_RANGES[0]); 
+    setMinRating(0); 
+    setPage(1); 
+  };
 
   const Sidebar = (
-    <aside className="space-y-8">
+    <aside className="space-y-10">
       <div>
-        <h3 className="font-bold text-[10px] mb-4 uppercase tracking-[0.2em] text-primary">Department</h3>
-        <div className="flex flex-col gap-px bg-border border border-border">
+        <h3 className="font-bold text-[10px] mb-5 uppercase tracking-[0.2em] text-primary border-b border-border pb-2">Department Directory</h3>
+        <div className="flex flex-col gap-1">
           <button onClick={() => { setCat(null); setPage(1); }}
-            className={`text-left px-4 py-3 text-xs uppercase tracking-widest transition-colors ${!cat ? "bg-primary text-white font-bold" : "bg-background hover:bg-secondary"}`}>All Departments</button>
+            className={`text-left px-4 py-2.5 text-[11px] uppercase tracking-widest transition-all ${!cat ? "bg-primary text-white font-bold" : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-secondary"}`}>
+            Total Inventory
+          </button>
           {categories.map(c => (
             <button key={c.slug} onClick={() => { setCat(c.slug); setPage(1); }}
-              className={`text-left px-4 py-3 text-xs uppercase tracking-widest transition-colors ${cat === c.slug ? "bg-primary text-white font-bold" : "bg-background hover:bg-secondary"}`}>{c.slug}</button>
+              className={`text-left px-4 py-2.5 text-[11px] uppercase tracking-widest transition-all ${cat === c.slug ? "bg-primary text-white font-bold" : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-secondary"}`}>
+              {c.slug}
+            </button>
           ))}
         </div>
       </div>
+      
       <div>
-        <h3 className="font-bold text-[10px] mb-4 uppercase tracking-[0.2em] text-primary">Price Limit</h3>
-        <div className="bg-secondary p-6 border border-border">
-          <input type="range" min={50} max={10000} step={100} value={maxPrice}
-            onChange={e => { setMaxPrice(Number(e.target.value)); setPage(1); }}
-            className="w-full accent-primary"/>
-          <div className="flex justify-between text-[10px] mt-4 uppercase tracking-widest font-bold">
-            <span className="text-muted-foreground">Min</span>
-            <span className="text-primary">KSh {maxPrice.toLocaleString()}</span>
-          </div>
+        <h3 className="font-bold text-[10px] mb-5 uppercase tracking-[0.2em] text-primary border-b border-border pb-2">Financial Tiers</h3>
+        <div className="flex flex-col gap-1">
+          {PRICE_RANGES.map(range => (
+            <button 
+              key={range.label} 
+              onClick={() => { setPriceRange(range); setPage(1); }}
+              className={`flex items-center justify-between px-4 py-2.5 text-[11px] uppercase tracking-widest transition-all ${priceRange.label === range.label ? "bg-secondary text-primary font-bold border-l-2 border-primary" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              {range.label}
+              {priceRange.label === range.label && <Check className="w-3 h-3"/>}
+            </button>
+          ))}
         </div>
       </div>
-      <button onClick={reset} className="w-full h-12 bg-white border border-primary text-primary font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-primary hover:text-white transition-all">Reset All Filters</button>
+
+      <button onClick={reset} className="w-full h-12 bg-white border border-border text-muted-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-primary hover:text-white hover:border-primary transition-all">
+        Clear Filter Matrix
+      </button>
     </aside>
   );
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12 md:py-20">
-      <div className="mb-12 border-b border-border pb-8">
+      <div className="mb-16 border-b border-border pb-10">
         <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">
           <Link to="/" className="hover:text-primary">Index</Link>
           <ChevronDown className="w-3 h-3 -rotate-90"/>
-          <span>Catalog</span>
+          <span className="text-foreground font-bold">Catalog</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter">Inventory Collection</h1>
-        <p className="text-muted-foreground text-sm mt-4 font-light max-w-xl">A comprehensive selection of premium goods sourced for the professional household. Quality assurance on every unit.</p>
+        <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter">Unit Inventory Directory</h1>
+        <p className="text-muted-foreground text-sm mt-6 font-light max-w-2xl leading-relaxed">
+          The Bizpoa Corporate Catalog provides a comprehensive overview of our current stock. Each unit is tracked and verified for quality assurance and logistical efficiency.
+        </p>
       </div>
 
-      <div className="grid lg:grid-cols-[280px_1fr] gap-12">
+      <div className="grid lg:grid-cols-[280px_1fr] gap-16">
         <div className="hidden lg:block">{Sidebar}</div>
         
         {showFilters && (
-          <div className="fixed inset-0 z-50 bg-background lg:hidden p-6 overflow-y-auto">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="font-bold uppercase tracking-widest">Filter Directory</h2>
-              <button onClick={() => setShowFilters(false)}><X className="w-6 h-6"/></button>
+          <div className="fixed inset-0 z-50 bg-white lg:hidden p-8 overflow-y-auto">
+            <div className="flex items-center justify-between mb-12">
+              <h2 className="font-bold uppercase tracking-widest text-sm">Filter Directory</h2>
+              <button onClick={() => setShowFilters(false)} className="w-10 h-10 flex items-center justify-center border border-border"><X className="w-5 h-5"/></button>
             </div>
             {Sidebar}
           </div>
         )}
 
         <div>
-          <div className="flex items-center justify-between gap-4 mb-8">
-            <div className="text-[10px] uppercase tracking-[0.2em] font-bold">
-              <span className="text-primary">{filtered.length}</span> Units Available
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-12 border-b border-border pb-6">
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-muted-foreground">
+              <span className="text-primary">{filtered.length}</span> verified units in current view
             </div>
-            <div className="flex items-center gap-2">
-              <button onClick={() => setShowFilters(true)} className="lg:hidden h-10 px-4 border border-border text-[10px] uppercase tracking-widest font-bold flex items-center gap-2">
-                <Filter className="w-3 h-3"/> Filters
+            <div className="flex items-center gap-4 w-full sm:w-auto">
+              <button onClick={() => setShowFilters(true)} className="lg:hidden flex-1 h-12 px-6 border border-border text-[10px] uppercase tracking-widest font-bold flex items-center justify-center gap-2">
+                <Filter className="w-3 h-3"/> Refine Search
               </button>
-              <div className="relative">
+              <div className="relative flex-1 sm:flex-initial">
                 <select value={sort} onChange={e => setSort(e.target.value as any)}
-                  className="appearance-none h-10 pl-4 pr-10 border border-border bg-background text-[10px] uppercase tracking-widest font-bold focus:outline-none focus:border-primary">
-                  <option value="newest">Sort: Default</option>
-                  <option value="price-low">Sort: Price Asc</option>
-                  <option value="price-high">Sort: Price Desc</option>
-                  <option value="rating">Sort: Rating</option>
+                  className="appearance-none w-full h-12 pl-6 pr-12 border border-border bg-white text-[10px] uppercase tracking-widest font-bold focus:outline-none focus:border-primary cursor-pointer">
+                  <option value="newest">Sequence: Default</option>
+                  <option value="price-low">Sequence: Value (Low to High)</option>
+                  <option value="price-high">Sequence: Value (High to Low)</option>
+                  <option value="rating">Sequence: Customer Index</option>
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 pointer-events-none"/>
+                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 pointer-events-none text-muted-foreground"/>
               </div>
             </div>
           </div>
 
           {paged.length === 0 ? (
-            <div className="text-center py-32 border border-dashed border-border">
-              <p className="text-muted-foreground text-sm uppercase tracking-widest">No matching units in inventory.</p>
-              <button onClick={reset} className="mt-4 text-primary font-bold text-xs uppercase tracking-widest underline underline-offset-4">Reset Directory</button>
+            <div className="text-center py-40 border border-border bg-secondary/20">
+              <p className="text-muted-foreground text-[10px] uppercase tracking-[0.3em] font-bold">Zero matching units found in current matrix.</p>
+              <button onClick={reset} className="mt-6 h-12 px-10 border border-primary text-primary font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-primary hover:text-white transition-all">Reinitialize Search</button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12">
               {paged.map((p, i) => <ProductCard key={p.id} product={p} index={i}/>)}
             </div>
           )}
 
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-px mt-16 bg-border border border-border">
+            <div className="flex items-center justify-center gap-px mt-24 border border-border bg-border">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(n => (
                 <button key={n} onClick={() => { setPage(n); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                  className={`h-12 px-6 text-[10px] font-bold uppercase tracking-widest transition-colors ${page === n ? "bg-primary text-white" : "bg-background hover:bg-secondary"}`}>{n}</button>
+                  className={`h-14 px-8 text-[10px] font-bold uppercase tracking-widest transition-colors ${page === n ? "bg-primary text-white" : "bg-white hover:bg-secondary"}`}>
+                  {n.toString().padStart(2, '0')}
+                </button>
               ))}
             </div>
           )}
@@ -140,4 +176,5 @@ function Shop() {
       </div>
     </div>
   );
-}
+}
+

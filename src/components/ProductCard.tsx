@@ -17,6 +17,9 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             src={product.image}
             alt={product.name}
             loading="lazy"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1594322436404-5a0526db4d13?auto=format&fit=crop&q=80&w=400&text=Unit+Image+Unavailable";
+            }}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         </Link>

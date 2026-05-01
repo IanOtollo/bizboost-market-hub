@@ -55,12 +55,22 @@ function ProductPage() {
       <div className="grid lg:grid-cols-2 gap-16">
         <div className="space-y-6">
           <div className="aspect-square bg-secondary/30 border border-border overflow-hidden">
-            <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+            <img 
+              src={product.image} 
+              alt={product.name} 
+              className="w-full h-full object-cover"
+              onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1594322436404-5a0526db4d13?auto=format&fit=crop&q=80&w=600&text=Unit+Image+Unavailable"; }}
+            />
           </div>
           <div className="grid grid-cols-4 gap-4">
             {[0,1,2,3].map(i => (
               <div key={i} className="aspect-square bg-secondary/30 border border-border opacity-50 hover:opacity-100 cursor-pointer transition-opacity">
-                <img src={product.image} alt="" className="w-full h-full object-cover" />
+                <img 
+                  src={product.image} 
+                  alt="" 
+                  className="w-full h-full object-cover"
+                  onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1594322436404-5a0526db4d13?auto=format&fit=crop&q=80&w=200&text=NA"; }}
+                />
               </div>
             ))}
           </div>
