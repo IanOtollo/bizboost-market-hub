@@ -135,10 +135,10 @@ function CategoryGrid() {
         {categories.map((c, i) => {
           const Icon = (Icons as any)[c.icon] ?? Icons.Package;
           return (
-            <Link key={c.slug} to="/shop" search={{}}
+            <Link key={c.slug} to="/shop"
               className="group bg-card rounded-2xl p-5 shadow-soft hover:shadow-card border border-border/60 hover:-translate-y-1 transition-all animate-fade-up"
               style={{ animationDelay: `${i * 50}ms` }}>
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-transform group-hover:scale-110" style={{ background: c.color + "/15", backgroundColor: c.color, opacity: 0.95 }}>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-transform group-hover:scale-110 shadow-soft" style={{ backgroundColor: c.color }}>
                 <Icon className="w-6 h-6 text-white" />
               </div>
               <div className="font-bold text-sm leading-tight">{c.slug}</div>
