@@ -1,33 +1,3 @@
-import p1 from "@/assets/products/p1.png";
-import p2 from "@/assets/products/p2.png";
-import p3 from "@/assets/products/p3.png";
-import p4 from "@/assets/products/p4.png";
-import f1 from "@/assets/products/f1.png";
-import f2 from "@/assets/products/f2.png";
-import f3 from "@/assets/products/f3.png";
-import f4 from "@/assets/products/f4.png";
-import e1 from "@/assets/products/e1.png";
-import e2 from "@/assets/products/e2.png";
-import e3 from "@/assets/products/e3.png";
-import e4 from "@/assets/products/e4.png";
-import b1 from "@/assets/products/b1.png";
-import b2 from "@/assets/products/b2.png";
-import b3 from "@/assets/products/b3.png";
-import b4 from "@/assets/products/b4.png";
-import h1 from "@/assets/products/h1.png";
-import h2 from "@/assets/products/h2.png";
-import h3 from "@/assets/products/h3.png";
-import h4 from "@/assets/products/h4.png";
-import s1 from "@/assets/products/s1.png";
-import s2 from "@/assets/products/s2.png";
-import s3 from "@/assets/products/s3.png";
-import s4 from "@/assets/products/s4.png";
-
-const IMAGES: Record<string, string> = {
-  p1, p2, p3, p4, f1, f2, f3, f4, e1, e2, e3, e4,
-  b1, b2, b3, b4, h1, h2, h3, h4, s1, s2, s3, s4,
-};
-
 export type Product = {
   id: string;
   name: string;
@@ -36,7 +6,6 @@ export type Product = {
   rating: number;
   reviews: number;
   description: string;
-  bg: string;
   initials: string;
   image: string;
   isNew?: boolean;
@@ -44,14 +13,16 @@ export type Product = {
 };
 
 export const categories = [
-  { slug: "Food & Groceries", icon: "ShoppingBasket", color: "oklch(0.79 0.16 75)" },
-  { slug: "Fashion & Clothing", icon: "Shirt", color: "oklch(0.6 0.22 27)" },
-  { slug: "Electronics", icon: "Smartphone", color: "oklch(0.46 0.09 165)" },
-  { slug: "Beauty & Skincare", icon: "Sparkles", color: "oklch(0.7 0.18 350)" },
-  { slug: "Home & Appliances", icon: "Home", color: "oklch(0.55 0.14 250)" },
-  { slug: "Shoes", icon: "Footprints", color: "oklch(0.4 0.08 30)" },
-  { slug: "Gifts & Hampers", icon: "Gift", color: "oklch(0.62 0.16 150)" },
-  { slug: "Baby & Kids", icon: "Baby", color: "oklch(0.78 0.13 210)" },
+  { slug: "Fresh Produce", icon: "Apple", color: "oklch(0.2 0.04 260)" },
+  { slug: "Dairy & Eggs", icon: "Milk", color: "oklch(0.2 0.04 260)" },
+  { slug: "Bakery", icon: "Croissant", color: "oklch(0.2 0.04 260)" },
+  { slug: "Meat & Poultry", icon: "Beef", color: "oklch(0.2 0.04 260)" },
+  { slug: "Pantry Essentials", icon: "Warehouse", color: "oklch(0.2 0.04 260)" },
+  { slug: "Beverages", icon: "Coffee", color: "oklch(0.2 0.04 260)" },
+  { slug: "Household & Cleaning", icon: "Sparkles", color: "oklch(0.2 0.04 260)" },
+  { slug: "Personal Care", icon: "User", color: "oklch(0.2 0.04 260)" },
+  { slug: "Baby Products", icon: "Baby", color: "oklch(0.2 0.04 260)" },
+  { slug: "Electronics", icon: "Smartphone", color: "oklch(0.2 0.04 260)" },
 ];
 
 const initials = (n: string) =>
@@ -59,44 +30,66 @@ const initials = (n: string) =>
 
 const make = (
   id: string, name: string, price: number, category: string,
-  rating: number, reviews: number, description: string, bg: string,
+  rating: number, reviews: number, description: string,
   flags: { isNew?: boolean; isFlash?: boolean } = {}
 ): Product => ({
-  id, name, price, category, rating, reviews, description, bg,
-  initials: initials(name), image: IMAGES[id], ...flags,
+  id, name, price, category, rating, reviews, description,
+  initials: initials(name), image: `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=80&w=400`, ...flags,
 });
 
 export const products: Product[] = [
-  // Food & Groceries
-  make("p1", "Unga wa Dola 2kg", 180, "Food & Groceries", 4.8, 312, "Premium maize flour, perfect for ugali. Trusted by Kenyan households since 1972.", "linear-gradient(135deg, oklch(0.86 0.17 82), oklch(0.7 0.16 60))", { isFlash: true }),
-  make("p2", "Brookside Milk 500ml", 65, "Food & Groceries", 4.7, 540, "Fresh long-life milk from local farms. UHT processed for freshness.", "linear-gradient(135deg, oklch(0.95 0.02 220), oklch(0.78 0.13 210))"),
-  make("p3", "Royco Mchuzi Mix 200g", 120, "Food & Groceries", 4.9, 421, "The secret to a delicious stew. A Kenyan kitchen essential.", "linear-gradient(135deg, oklch(0.6 0.22 27), oklch(0.4 0.18 25))"),
-  make("p4", "Indomie Noodles 12 Pack", 360, "Food & Groceries", 4.6, 880, "Quick, tasty noodles. Perfect for breakfast or lunch in 3 minutes.", "linear-gradient(135deg, oklch(0.79 0.16 75), oklch(0.6 0.22 27))", { isNew: true }),
-  // Fashion & Clothing
-  make("f1", "Men's Ankara Print Shirt", 1200, "Fashion & Clothing", 4.7, 156, "Bold African print shirt. 100% cotton, tailored fit. Made in Kenya.", "linear-gradient(135deg, oklch(0.5 0.18 50), oklch(0.6 0.22 27))", { isFlash: true }),
-  make("f2", "Women's Kitenge Dress", 2500, "Fashion & Clothing", 4.9, 203, "Elegant kitenge with modern silhouette. Stunning for occasions.", "linear-gradient(135deg, oklch(0.55 0.18 320), oklch(0.7 0.18 350))", { isNew: true }),
-  make("f3", "Unisex Hoodie (Black)", 1800, "Fashion & Clothing", 4.6, 98, "Premium cotton-blend hoodie. Cozy and stylish for cool Nairobi nights.", "linear-gradient(135deg, oklch(0.25 0.02 250), oklch(0.4 0.04 250))"),
-  make("f4", "Kids School Uniform Set", 950, "Fashion & Clothing", 4.5, 67, "Durable, comfortable uniform set. Ready for the school year.", "linear-gradient(135deg, oklch(0.55 0.14 250), oklch(0.7 0.16 230))"),
+  // Fresh Produce
+  make("1510832171-3c921135448d", "Organic Red Apples (1kg)", 450, "Fresh Produce", 4.8, 124, "Fresh, crisp red apples sourced from local organic farms."),
+  make("1587334274328-2283a246a447", "Fresh Bananas (Bunch)", 150, "Fresh Produce", 4.7, 89, "Sweet, ripe bananas, rich in potassium."),
+  make("1597362925123-77861d3eeac4", "Hass Avocado (Each)", 60, "Fresh Produce", 4.9, 210, "Creamy, large Hass avocados perfect for any meal."),
+  make("1566385102311-63e1d7d0e0a5", "Fresh Spinach (Bunch)", 80, "Fresh Produce", 4.6, 56, "Deep green, nutrient-rich spinach leaves."),
+  
+  // Dairy & Eggs
+  make("1563636619-e910029339cf", "Premium Whole Milk 2L", 280, "Dairy & Eggs", 4.8, 342, "Farm-fresh whole milk, pasteurized for safety and taste."),
+  make("1550583726-2248277dd494", "Greek Yogurt Plain 500g", 350, "Dairy & Eggs", 4.7, 156, "Thick, creamy Greek yogurt, high in protein."),
+  make("1528750955940-5d642ef8143c", "Cheddar Cheese 250g", 520, "Dairy & Eggs", 4.8, 92, "Aged sharp cheddar cheese, perfect for snacks and cooking."),
+  make("1582401656496-9d75f6281023", "Large White Eggs (12pk)", 240, "Dairy & Eggs", 4.9, 412, "Farm-fresh large white eggs."),
+  
+  // Bakery
+  make("1509440159596-0249088772ff", "Artisan Sourdough Bread", 420, "Bakery", 4.9, 78, "Handcrafted sourdough bread with a perfect crust."),
+  make("1555507036-ab1f4038808a", "Butter Croissants (4pk)", 380, "Bakery", 4.7, 115, "Flaky, buttery croissants baked fresh daily."),
+  make("1597650529123-24d5a7ffec7a", "Chocolate Chip Cookies (6pk)", 290, "Bakery", 4.8, 203, "Soft and chewy cookies with Belgian chocolate chips."),
+  
+  // Meat & Poultry
+  make("1607623814075-e5121ae28741", "Prime Beef Steak (500g)", 850, "Meat & Poultry", 4.8, 145, "Tender, grass-fed prime beef steak."),
+  make("1604908176997-125f2527c356", "Fresh Chicken Breast (1kg)", 750, "Meat & Poultry", 4.7, 189, "Skinless, boneless fresh chicken breast."),
+  make("1544025162-d76694265947", "Premium Pork Chops (500g)", 680, "Meat & Poultry", 4.6, 67, "High-quality center-cut pork chops."),
+  
+  // Pantry Essentials
+  make("1586201375745-f60aff44465b", "Extra Virgin Olive Oil 1L", 1250, "Pantry Essentials", 4.9, 312, "Cold-pressed extra virgin olive oil from Spain."),
+  make("1599940824399-4258e756c3ef", "Basmati Rice 5kg", 1850, "Pantry Essentials", 4.8, 456, "Long-grain, aromatic aged Basmati rice."),
+  make("1589985270826-4403070bc96a", "Premium Sea Salt 500g", 180, "Pantry Essentials", 4.7, 88, "Natural sea salt crystals for gourmet seasoning."),
+  make("1510627489325-3007ec1031c1", "Organic Honey 500g", 650, "Pantry Essentials", 4.9, 215, "Pure, unfiltered wildflower honey."),
+  
+  // Beverages
+  make("1544813546-697593bb3146", "Sparkling Water 1.5L", 120, "Beverages", 4.5, 340, "Crisp, refreshing sparkling mineral water."),
+  make("1625082590740-9dc1005a9648", "Fresh Orange Juice 1L", 320, "Beverages", 4.7, 128, "100% pure squeezed orange juice, no added sugar."),
+  make("1594631252811-f58a4c30c33a", "Premium Roast Coffee 250g", 1100, "Beverages", 4.9, 187, "Dark roast Arabica coffee beans, medium grind."),
+  
+  // Household & Cleaning
+  make("1584622650139-3987d9120a2d", "Eco-Friendly Dish Soap", 280, "Household & Cleaning", 4.6, 142, "Plant-based, biodegradable dishwashing liquid."),
+  make("1585314062331-1d52847ffad1", "Ultra Soft Toilet Paper (12pk)", 750, "Household & Cleaning", 4.8, 567, "Premium 3-ply toilet paper, soft and strong."),
+  make("1608613307612-ba25e5e709b4", "Multi-Surface Cleaner 750ml", 450, "Household & Cleaning", 4.7, 231, "Effective antibacterial cleaner for all surfaces."),
+  
+  // Personal Care
+  make("1559591933941-ed574220b5aa", "Natural Body Wash 500ml", 580, "Personal Care", 4.7, 167, "Sulfate-free body wash with essential oils."),
+  make("1598440997627-750588944e42", "Whitening Toothpaste 100g", 250, "Personal Care", 4.6, 421, "Advanced whitening formula with fluoride."),
+  make("1620916566854-2a67e56a4220", "Gentle Face Cleanser", 850, "Personal Care", 4.8, 112, "Dermatologist-tested cleanser for sensitive skin."),
+  
+  // Baby Products
+  make("1594411130704-586739f76a3e", "Sensitive Baby Wipes (80pk)", 320, "Baby Products", 4.8, 890, "Fragrance-free wipes for delicate baby skin."),
+  make("1603314944439-ef51207f272a", "Premium Baby Diapers (Size 3)", 1850, "Baby Products", 4.7, 1245, "Ultra-absorbent diapers with leak protection."),
+  make("1612193671239-01ee7cc50e68", "Organic Baby Food Jar", 180, "Baby Products", 4.6, 312, "Smooth fruit puree for babies 6 months+."),
+  
   // Electronics
-  make("e1", "Wireless Earbuds Pro", 2999, "Electronics", 4.7, 489, "Bluetooth 5.3, 30hr battery, noise cancellation. Premium sound.", "linear-gradient(135deg, oklch(0.3 0.04 250), oklch(0.18 0.03 160))", { isFlash: true }),
-  make("e2", "USB-C Fast Charger 65W", 850, "Electronics", 4.8, 312, "Charge your phone, tablet, or laptop. GaN tech, compact design.", "linear-gradient(135deg, oklch(0.46 0.09 165), oklch(0.34 0.07 166))"),
-  make("e3", "Portable Bluetooth Speaker", 1500, "Electronics", 4.6, 221, "Loud, clear, waterproof. Take the party anywhere.", "linear-gradient(135deg, oklch(0.6 0.22 27), oklch(0.4 0.18 25))", { isNew: true }),
-  make("e4", "Phone Holder for Car", 450, "Electronics", 4.4, 145, "Sturdy magnetic mount. One-hand operation, fits all phones.", "linear-gradient(135deg, oklch(0.5 0.05 250), oklch(0.35 0.03 250))"),
-  // Beauty & Skincare
-  make("b1", "Dark & Lovely Relaxer Kit", 650, "Beauty & Skincare", 4.7, 412, "Salon-quality results at home. Gentle on hair and scalp.", "linear-gradient(135deg, oklch(0.7 0.18 350), oklch(0.55 0.18 320))"),
-  make("b2", "Nivea Body Lotion 400ml", 480, "Beauty & Skincare", 4.9, 678, "48hr deep moisture. For soft, glowing skin every day.", "linear-gradient(135deg, oklch(0.85 0.05 240), oklch(0.7 0.08 230))", { isFlash: true }),
-  make("b3", "Vaseline Intensive Care 250ml", 320, "Beauty & Skincare", 4.8, 521, "Heals dry skin in 5 days. Trusted formula, generations strong.", "linear-gradient(135deg, oklch(0.55 0.14 250), oklch(0.4 0.1 250))"),
-  make("b4", "Coconut Oil Hair Mask", 550, "Beauty & Skincare", 4.6, 234, "Pure coconut oil. Nourishes, strengthens, and shines your hair.", "linear-gradient(135deg, oklch(0.85 0.08 95), oklch(0.7 0.12 80))", { isNew: true }),
-  // Home & Appliances
-  make("h1", "Stainless Steel Sufuria Set", 1850, "Home & Appliances", 4.8, 187, "5-piece premium cookware set. Durable, even-heat distribution.", "linear-gradient(135deg, oklch(0.7 0.02 250), oklch(0.5 0.02 250))"),
-  make("h2", "Electric Kettle 1.8L", 1200, "Home & Appliances", 4.7, 256, "Boils in 3 minutes. Auto shut-off, cool-touch handle.", "linear-gradient(135deg, oklch(0.4 0.04 250), oklch(0.25 0.02 250))"),
-  make("h3", "Mosquito Repellent Plug-in", 380, "Home & Appliances", 4.5, 134, "Odorless, all-night protection. Safe for the whole family.", "linear-gradient(135deg, oklch(0.62 0.16 150), oklch(0.46 0.09 165))"),
-  make("h4", "LED Bulb Pack of 4", 420, "Home & Appliances", 4.7, 312, "Save energy, last 25,000 hours. Bright, warm light.", "linear-gradient(135deg, oklch(0.86 0.17 82), oklch(0.79 0.16 75))"),
-  // Shoes
-  make("s1", "Men's Leather Loafers", 3200, "Shoes", 4.8, 89, "Genuine leather, hand-stitched. Office-ready elegance.", "linear-gradient(135deg, oklch(0.4 0.08 30), oklch(0.25 0.05 30))", { isNew: true }),
-  make("s2", "Women's Block Heels", 2100, "Shoes", 4.7, 167, "Comfortable 6cm heel. Day-to-night versatility.", "linear-gradient(135deg, oklch(0.55 0.18 320), oklch(0.4 0.15 320))"),
-  make("s3", "Kids Canvas Sneakers", 850, "Shoes", 4.6, 102, "Lightweight, washable. Ready for school and play.", "linear-gradient(135deg, oklch(0.6 0.22 27), oklch(0.5 0.18 25))"),
-  make("s4", "Sports Running Shoes", 2800, "Shoes", 4.7, 245, "Mesh upper, cushioned sole. Feel the run.", "linear-gradient(135deg, oklch(0.46 0.09 165), oklch(0.62 0.16 150))", { isFlash: true }),
+  make("1511704953440-410bc3bc1944", "Fast Wireless Charger", 1200, "Electronics", 4.6, 345, "15W fast wireless charging pad for all devices."),
+  make("1523275335640-470b4a838320", "Bluetooth Earbuds", 3500, "Electronics", 4.5, 678, "Compact earbuds with crystal clear sound quality."),
+  make("1588872626084-257a3a5df555", "Portable Power Bank 10k mAh", 2800, "Electronics", 4.7, 156, "High-capacity power bank with dual USB ports."),
 ];
 
 export const formatKsh = (n: number) =>
@@ -105,7 +98,7 @@ export const formatKsh = (n: number) =>
 export const WHATSAPP_NUMBER = "254700000000";
 
 export const buyOnWhatsApp = (productName: string, price: number) => {
-  const msg = `Hi! I want to buy ${productName} - KSh ${price.toLocaleString("en-KE")}. Is it available?`;
+  const msg = `Hi Bizpoa! I want to buy ${productName} - KSh ${price.toLocaleString("en-KE")}. Is it available?`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
 };
 
@@ -116,6 +109,6 @@ export const checkoutCartOnWhatsApp = (
   const lines = items.map(i => `• ${i.name} x${i.quantity} - KSh ${(i.price * i.quantity).toLocaleString("en-KE")}`);
   const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
   const total = subtotal + delivery;
-  const msg = `Hi BizBoost Market! I'd like to order:\n\n${lines.join("\n")}\n\nSubtotal: KSh ${subtotal.toLocaleString("en-KE")}\nDelivery: KSh ${delivery}\nTotal: KSh ${total.toLocaleString("en-KE")}\n\nPlease confirm availability. Thank you!`;
+  const msg = `Hi Bizpoa Team! I'd like to place an order:\n\n${lines.join("\n")}\n\nSubtotal: KSh ${subtotal.toLocaleString("en-KE")}\nDelivery: KSh ${delivery}\nTotal: KSh ${total.toLocaleString("en-KE")}\n\nPlease confirm availability and delivery time. Thank you!`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
-};
+};

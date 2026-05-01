@@ -4,12 +4,11 @@ import { Logo } from "./Logo";
 
 export function Footer() {
   return (
-    <footer className="mt-20 bg-primary-deep text-primary-foreground">
-      <div className="h-1 gradient-flag" />
-      <div className="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10">
-        <div className="space-y-4">
-          <div className="bg-white rounded-xl p-3 inline-block"><Logo /></div>
-          <p className="text-sm text-white/70 leading-relaxed">Kenya's freshest online store. Shop everything, pay via WhatsApp.</p>
+    <footer className="mt-20 bg-primary text-white">
+      <div className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-12">
+        <div className="space-y-6">
+          <Logo />
+          <p className="text-sm text-white/50 leading-relaxed font-light">The professional online supermarket for premium household essentials. Reliability and quality delivered to your doorstep.</p>
           <div className="flex gap-2">
             <a className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" href="#"><Facebook className="w-4 h-4"/></a>
             <a className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" href="#"><Instagram className="w-4 h-4"/></a>
@@ -39,18 +38,17 @@ export function Footer() {
           <ul className="space-y-2.5 text-sm text-white/80">
             <li className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 shrink-0"/> Nairobi CBD, Kenya</li>
             <li className="flex items-center gap-2"><Phone className="w-4 h-4"/> +254 700 000 000</li>
-            <li className="flex items-center gap-2"><Mail className="w-4 h-4"/><span>hello@bizboost.co.ke</span></li>
+            <li className="flex items-center gap-2"><Mail className="w-4 h-4"/><span>contact@bizpoa.com</span></li>
           </ul>
-          <div className="mt-4 inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white text-primary-deep font-bold text-xs shadow-soft">
-            <span className="w-6 h-6 rounded-full bg-success flex items-center justify-center text-white text-[10px]">M</span>
-            M-PESA Accepted
+          <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 border border-white/20 bg-white/5 text-white font-bold text-[10px] uppercase tracking-widest">
+            Corporate Verified
           </div>
         </div>
       </div>
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/60">
-          <p>© 2024 BizBoost Market. All rights reserved.</p>
-          <p>Designed & built in Nairobi 🇰🇪</p>
+      <div className="border-t border-white/5 bg-primary-deep">
+        <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] uppercase tracking-widest text-white/30 font-bold">
+          <p>© 2026 BIZPOA CORPORATION. ALL RIGHTS RESERVED.</p>
+          <p>Global Headquarters • Nairobi, Kenya</p>
         </div>
       </div>
     </footer>

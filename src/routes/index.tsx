@@ -1,106 +1,42 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import * as Icons from "lucide-react";
-import { ArrowRight, Sparkles, Truck, ShieldCheck, MessageCircle, Zap, Star } from "lucide-react";
+import { ArrowRight, Truck, ShieldCheck, CreditCard, ChevronRight, Star } from "lucide-react";
 import { products, categories, formatKsh } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "BizBoost Market — Shop Everything. Pay via WhatsApp." },
-      { name: "description", content: "Kenya's freshest online store. 500+ products across food, fashion, electronics, beauty, and more. Free Nairobi delivery." },
-      { property: "og:title", content: "BizBoost Market — Kenya's Freshest Online Store" },
-      { property: "og:description", content: "Shop everything. Pay via WhatsApp. Fast Nairobi delivery." },
+      { title: "Bizpoa — The Professional Online Supermarket" },
+      { name: "description", content: "Quality household essentials delivered with professionalism. Experience the new standard in Kenyan online shopping." },
     ],
   }),
   component: Index,
 });
 
-function Countdown() {
-  const [t, setT] = useState({ h: 2, m: 59, s: 59 });
-  useEffect(() => {
-    const i = setInterval(() => {
-      setT(prev => {
-        let { h, m, s } = prev;
-        s -= 1;
-        if (s < 0) { s = 59; m -= 1; }
-        if (m < 0) { m = 59; h -= 1; }
-        if (h < 0) { h = 2; m = 59; s = 59; }
-        return { h, m, s };
-      });
-    }, 1000);
-    return () => clearInterval(i);
-  }, []);
-  const pad = (n: number) => n.toString().padStart(2, "0");
-  return (
-    <div className="flex items-center gap-1.5 font-mono">
-      {[
-        { v: pad(t.h), l: "HRS" },
-        { v: pad(t.m), l: "MIN" },
-        { v: pad(t.s), l: "SEC" },
-      ].map((x, i) => (
-        <div key={i} className="bg-primary-deep text-white rounded-lg px-2 py-1 min-w-[44px] text-center">
-          <div className="text-base font-extrabold">{x.v}</div>
-          <div className="text-[8px] opacity-70 tracking-wider">{x.l}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="absolute inset-0 gradient-hero" />
-      <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-accent/30 blur-3xl animate-float" />
-      <div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full bg-primary-glow/30 blur-3xl animate-float" style={{ animationDelay: "2s" }} />
-      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "32px 32px" }} />
-      <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
-        <div className="text-white space-y-6 animate-fade-up">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/20 text-xs font-semibold">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse"/> Made in Nairobi 🇰🇪
+    <section className="relative bg-primary text-white overflow-hidden">
+      <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=2000')", backgroundSize: "cover", backgroundPosition: "center" }} />
+      <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-32">
+        <div className="max-w-3xl animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-white/20 bg-white/5 text-[10px] uppercase tracking-[0.2em] font-bold">
+            Established 2026 • Premium Quality
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] text-balance">
-            Shop Everything.
-            <br />
-            <span className="bg-gradient-to-r from-accent-glow to-accent bg-clip-text text-transparent">Pay via WhatsApp.</span>
+          <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6 tracking-tighter">
+            The Professional Choice for Your Household.
           </h1>
-          <p className="text-base md:text-lg text-white/80 max-w-md leading-relaxed">
-            Kenya's freshest online store. From unga to electronics — order in seconds, pay how you love.
+          <p className="text-xl text-white/70 mb-10 leading-relaxed max-w-xl font-light">
+            Bizpoa delivers a curated selection of premium supermarket goods with the efficiency and reliability of a global enterprise. 
           </p>
-          <div className="flex flex-wrap gap-3 pt-2">
-            <Link to="/shop" className="inline-flex items-center gap-2 h-12 px-7 rounded-full gradient-gold text-primary-deep font-bold shadow-gold hover:scale-105 transition-transform">
-              Shop Now <ArrowRight className="w-4 h-4"/>
+          <div className="flex flex-wrap gap-4">
+            <Link to="/shop" className="h-14 px-10 flex items-center bg-white text-primary font-bold uppercase text-xs tracking-widest hover:bg-white/90 transition-colors">
+              Explore Collection <ArrowRight className="ml-2 w-4 h-4"/>
             </Link>
-            <a href="https://wa.me/254700000000" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white font-semibold hover:bg-white/20 transition-colors">
-              <MessageCircle className="w-4 h-4"/> Chat with us
-            </a>
-          </div>
-          <div className="flex items-center gap-4 pt-4 text-sm text-white/70">
-            <div className="flex -space-x-2">
-              {["EM", "JK", "AW", "MN"].map((s, i) => (
-                <div key={i} className="w-8 h-8 rounded-full border-2 border-primary-deep flex items-center justify-center text-[10px] font-bold text-white"
-                  style={{ background: ["oklch(0.79 0.16 75)","oklch(0.6 0.22 27)","oklch(0.62 0.16 150)","oklch(0.7 0.18 350)"][i] }}>{s}</div>
-              ))}
-            </div>
-            <div><span className="font-bold text-white">10,000+</span> happy Kenyans</div>
-          </div>
-        </div>
-
-        <div className="relative hidden md:block animate-float">
-          <div className="absolute inset-0 rounded-[3rem] bg-white/5 backdrop-blur-xl border border-white/10 rotate-3" />
-          <div className="relative grid grid-cols-2 gap-4 p-6">
-            {products.slice(0, 4).map((p, i) => (
-              <div key={p.id} className="bg-white rounded-2xl p-3 shadow-glow rotate-[var(--r)]" style={{ ["--r" as any]: `${(i % 2 === 0 ? -2 : 2)}deg` }}>
-                <div className="aspect-square rounded-xl overflow-hidden mb-2 bg-muted">
-                  <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
-                </div>
-                <div className="text-xs font-semibold text-foreground truncate">{p.name}</div>
-                <div className="text-sm font-extrabold text-primary">{formatKsh(p.price)}</div>
-              </div>
-            ))}
+            <Link to="/about" className="h-14 px-10 flex items-center border border-white/30 text-white font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-colors">
+              Our Vision
+            </Link>
           </div>
         </div>
       </div>
@@ -108,43 +44,46 @@ function Hero() {
   );
 }
 
-function Marquee() {
-  const items = ["FREE DELIVERY IN NAIROBI", "AUTHENTIC PRODUCTS", "M-PESA ACCEPTED", "24/7 SUPPORT"];
+function Stats() {
+  const items = [
+    { label: "Products Catalog", value: "5,000+" },
+    { label: "Happy Customers", value: "250k" },
+    { label: "Delivery Points", value: "47 Counties" },
+    { label: "Quality Rating", value: "4.9/5" },
+  ];
   return (
-    <div className="bg-primary-deep text-white py-3 overflow-hidden border-y border-primary-glow/20">
-      <div className="flex animate-marquee whitespace-nowrap">
-        {[...items, ...items, ...items, ...items].map((x, i) => (
-          <span key={i} className="mx-8 text-xs font-bold tracking-[0.25em] flex items-center gap-8">
-            {x} <span className="text-accent">★</span>
-          </span>
+    <div className="bg-secondary border-b border-border">
+      <div className="max-w-7xl mx-auto px-6 py-10 flex flex-wrap justify-between gap-8">
+        {items.map((x, i) => (
+          <div key={i} className="flex flex-col">
+            <span className="text-2xl font-bold text-primary">{x.value}</span>
+            <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">{x.label}</span>
+          </div>
         ))}
       </div>
     </div>
   );
 }
 
-function CategoryGrid() {
+function CategorySection() {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16">
-      <div className="flex items-end justify-between mb-8">
+    <section className="max-w-7xl mx-auto px-6 py-20">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
         <div>
-          <div className="text-xs uppercase tracking-[0.25em] font-bold text-accent mb-2">Browse</div>
-          <h2 className="text-3xl md:text-4xl font-extrabold">Shop by Category</h2>
+          <h2 className="text-3xl font-bold tracking-tighter uppercase mb-2">Curated Categories</h2>
+          <p className="text-muted-foreground max-w-md">Browse our professionally organized departments for your daily essentials.</p>
         </div>
-        <Link to="/shop" className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">View all <ArrowRight className="w-4 h-4"/></Link>
+        <Link to="/shop" className="text-xs font-bold uppercase tracking-widest text-primary flex items-center group">
+          View Full Directory <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform"/>
+        </Link>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-px bg-border border border-border">
         {categories.map((c, i) => {
           const Icon = (Icons as any)[c.icon] ?? Icons.Package;
           return (
-            <Link key={c.slug} to="/shop"
-              className="group bg-card rounded-2xl p-5 shadow-soft hover:shadow-card border border-border/60 hover:-translate-y-1 transition-all animate-fade-up"
-              style={{ animationDelay: `${i * 50}ms` }}>
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-transform group-hover:scale-110 shadow-soft" style={{ backgroundColor: c.color }}>
-                <Icon className="w-6 h-6 text-white" />
-              </div>
-              <div className="font-bold text-sm leading-tight">{c.slug}</div>
-              <div className="text-xs text-muted-foreground mt-1">Shop now →</div>
+            <Link key={c.slug} to="/shop" className="bg-background p-8 hover:bg-secondary transition-colors group">
+              <Icon className="w-8 h-8 text-primary mb-6 group-hover:scale-110 transition-transform" strokeWidth={1.5}/>
+              <h3 className="font-bold text-sm uppercase tracking-tight">{c.slug}</h3>
             </Link>
           );
         })}
@@ -153,66 +92,41 @@ function CategoryGrid() {
   );
 }
 
-function FlashDeals() {
-  const flash = products.filter(p => p.isFlash).slice(0, 4);
+function FeaturedSection() {
+  const featured = products.slice(0, 8);
   return (
-    <section className="max-w-7xl mx-auto px-6 py-12">
-      <div className="rounded-3xl gradient-hero p-6 sm:p-10 relative overflow-hidden shadow-glow">
-        <div className="absolute -right-10 -top-10 w-60 h-60 rounded-full bg-accent/30 blur-3xl"/>
-        <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <div className="text-white">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-primary-deep text-xs font-extrabold mb-2"><Zap className="w-3.5 h-3.5"/> FLASH DEALS</div>
-            <h2 className="text-3xl md:text-4xl font-extrabold">Limited Time Offers 🔥</h2>
+    <section className="bg-secondary/30 py-20">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tighter uppercase mb-2">Premium Selection</h2>
+            <p className="text-muted-foreground max-w-md">Our highest rated essentials, hand-picked for quality.</p>
           </div>
-          <Countdown />
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 relative">
-          {flash.map((p, i) => <ProductCard key={p.id} product={p} index={i} />)}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {featured.map((p, i) => <ProductCard key={p.id} product={p} index={i} />)}
         </div>
       </div>
     </section>
   );
 }
 
-function NewArrivals() {
-  const items = products.slice().reverse().slice(0, 8);
-  return (
-    <section className="max-w-7xl mx-auto px-6 py-12">
-      <div className="flex items-end justify-between mb-6">
-        <div>
-          <div className="text-xs uppercase tracking-[0.25em] font-bold text-accent mb-2">Just In</div>
-          <h2 className="text-3xl md:text-4xl font-extrabold flex items-center gap-2"><Sparkles className="w-7 h-7 text-accent"/> New Arrivals</h2>
-        </div>
-        <Link to="/shop" className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-primary">View all <ArrowRight className="w-4 h-4"/></Link>
-      </div>
-      <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar -mx-6 px-6">
-        {items.map((p, i) => (
-          <div key={p.id} className="min-w-[240px] sm:min-w-[260px]"><ProductCard product={p} index={i}/></div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function TrustBadges() {
+function TrustSection() {
   const items = [
-    { icon: ShieldCheck, t: "100% Authentic", d: "Verified products" },
-    { icon: Truck, t: "Fast Delivery", d: "Same-day in Nairobi" },
-    { icon: Sparkles, t: "Easy Returns", d: "7-day guarantee" },
-    { icon: MessageCircle, t: "WhatsApp Checkout", d: "Secure & instant" },
+    { icon: ShieldCheck, title: "Quality Guaranteed", desc: "Rigorous quality control on every item we stock." },
+    { icon: Truck, title: "Corporate Logistics", desc: "Dedicated delivery fleet ensuring timely arrival." },
+    { icon: CreditCard, title: "Secure Transactions", desc: "Formal payment processing for your peace of mind." },
   ];
   return (
-    <section className="max-w-7xl mx-auto px-6 py-12">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+    <section className="max-w-7xl mx-auto px-6 py-24">
+      <div className="grid md:grid-cols-3 gap-12">
         {items.map((x, i) => (
-          <div key={i} className="bg-card rounded-2xl p-5 border border-border/60 shadow-soft flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-              <x.icon className="w-5 h-5 text-primary"/>
+          <div key={i} className="flex flex-col text-center items-center">
+            <div className="w-16 h-16 border border-border flex items-center justify-center mb-6">
+              <x.icon className="w-8 h-8 text-primary" strokeWidth={1}/>
             </div>
-            <div className="min-w-0">
-              <div className="font-bold text-sm">{x.t}</div>
-              <div className="text-xs text-muted-foreground truncate">{x.d}</div>
-            </div>
+            <h3 className="font-bold uppercase tracking-widest text-sm mb-3">{x.title}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{x.desc}</p>
           </div>
         ))}
       </div>
@@ -221,28 +135,15 @@ function TrustBadges() {
 }
 
 function Newsletter() {
-  const [email, setEmail] = useState("");
-  const [done, setDone] = useState(false);
   return (
-    <section className="max-w-7xl mx-auto px-6 py-12">
-      <div className="rounded-3xl bg-card border border-border shadow-card p-8 sm:p-12 relative overflow-hidden">
-        <div className="absolute -right-20 -top-20 w-72 h-72 rounded-full gradient-gold opacity-20 blur-3xl"/>
-        <div className="absolute -left-20 -bottom-20 w-72 h-72 rounded-full bg-primary opacity-15 blur-3xl"/>
-        <div className="relative max-w-2xl mx-auto text-center">
-          <div className="inline-flex items-center gap-1 mb-3"><Star className="w-4 h-4 fill-accent text-accent"/><Star className="w-4 h-4 fill-accent text-accent"/><Star className="w-4 h-4 fill-accent text-accent"/></div>
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-2">Get exclusive deals first</h2>
-          <p className="text-muted-foreground mb-6">Join 10,000+ Kenyans saving on flash deals every week.</p>
-          {done ? (
-            <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-success text-white font-semibold">✓ You're in! Karibu sana.</div>
-          ) : (
-            <form onSubmit={(e) => { e.preventDefault(); if (email) setDone(true); }} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-              <input type="email" required value={email} onChange={e=>setEmail(e.target.value)}
-                placeholder="your@email.com"
-                className="flex-1 h-12 px-5 rounded-full bg-muted/60 border border-transparent focus:border-primary focus:bg-background outline-none text-sm transition-all"/>
-              <button className="h-12 px-7 rounded-full bg-primary text-primary-foreground font-bold shadow-glow hover:scale-105 transition-transform">Subscribe</button>
-            </form>
-          )}
-        </div>
+    <section className="bg-primary py-20">
+      <div className="max-w-3xl mx-auto px-6 text-center text-white">
+        <h2 className="text-3xl font-bold uppercase tracking-tighter mb-4">Corporate Updates</h2>
+        <p className="text-white/60 mb-10 font-light">Join our professional network to receive curated offers and enterprise news.</p>
+        <form className="flex flex-col sm:flex-row gap-px bg-white/10 p-1 border border-white/20">
+          <input type="email" placeholder="Professional Email Address" className="flex-1 bg-transparent px-6 py-4 outline-none text-sm placeholder:text-white/30"/>
+          <button className="bg-white text-primary px-10 py-4 text-xs font-bold uppercase tracking-widest hover:bg-white/90 transition-all">Subscribe</button>
+        </form>
       </div>
     </section>
   );
@@ -250,14 +151,14 @@ function Newsletter() {
 
 function Index() {
   return (
-    <div>
+    <div className="flex flex-col">
       <Hero />
-      <Marquee />
-      <CategoryGrid />
-      <FlashDeals />
-      <NewArrivals />
-      <TrustBadges />
+      <Stats />
+      <CategorySection />
+      <FeaturedSection />
+      <TrustSection />
       <Newsletter />
     </div>
   );
 }
+

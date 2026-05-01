@@ -12,18 +12,18 @@ export function FloatingButtons() {
   return (
     <>
       <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi BizBoost! I have a question.")}`}
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi Bizpoa Support! I have an inquiry regarding your inventory.")}`}
         target="_blank" rel="noreferrer"
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-whatsapp text-whatsapp-foreground flex items-center justify-center shadow-glow hover:scale-110 transition-transform animate-pulse-ring"
-        aria-label="Chat on WhatsApp"
+        className="fixed bottom-8 right-8 z-50 w-16 h-16 bg-whatsapp text-white flex items-center justify-center shadow-2xl hover:scale-105 transition-all border-4 border-white"
+        aria-label="Corporate Support"
       >
-        <MessageCircle className="w-7 h-7" fill="currentColor" />
+        <MessageCircle className="w-8 h-8" fill="currentColor" />
       </a>
       {show && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-24 right-6 z-50 w-11 h-11 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-card hover:scale-110 transition-transform animate-fade-up"
-          aria-label="Back to top"
+          className="fixed bottom-28 right-8 z-50 w-12 h-12 bg-primary text-white flex items-center justify-center shadow-xl hover:scale-105 transition-all"
+          aria-label="Return to Top"
         >
           <ArrowUp className="w-5 h-5" />
         </button>

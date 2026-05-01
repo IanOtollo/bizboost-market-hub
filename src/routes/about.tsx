@@ -1,119 +1,115 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart, Sparkles, Target, MapPin, Users, Package, Calendar } from "lucide-react";
+import { Shield, Target, MapPin, Users, Package, Calendar, Globe } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About BizBoost Market — Built in Nairobi" },
-      { name: "description", content: "BizBoost Market is Kenya's freshest online store. Our story, mission, and the team making shopping joyful." },
-      { property: "og:title", content: "About BizBoost Market" },
-      { property: "og:description", content: "Built in Nairobi for Kenyans, with love." },
+      { title: "Corporate Overview — Bizpoa Online Supermarket" },
+      { name: "description", content: "Learn about Bizpoa's commitment to quality, efficiency, and the professionalization of the online supermarket experience in Kenya." },
     ],
   }),
   component: About,
 });
 
 const team = [
-  { name: "Esther Mwangi", role: "Founder & CEO", color: "oklch(0.79 0.16 75)", initials: "EM" },
-  { name: "James Kimani", role: "Head of Operations", color: "oklch(0.46 0.09 165)", initials: "JK" },
-  { name: "Aisha Wambui", role: "Customer Experience", color: "oklch(0.7 0.18 350)", initials: "AW" },
-  { name: "Mike Ndegwa", role: "Tech Lead", color: "oklch(0.6 0.22 27)", initials: "MN" },
+  { name: "Esther Mwangi", role: "Executive Chair", initials: "EM" },
+  { name: "James Kimani", role: "Chief Operating Officer", initials: "JK" },
+  { name: "Aisha Wambui", role: "Director of Logistics", initials: "AW" },
+  { name: "Mike Ndegwa", role: "Chief Technology Officer", initials: "MN" },
 ];
 
 const stats = [
-  { icon: Package, n: "500+", l: "Products" },
-  { icon: Users, n: "10,000+", l: "Happy Customers" },
-  { icon: MapPin, n: "Nairobi", l: "Based" },
-  { icon: Calendar, n: "2024", l: "Established" },
+  { icon: Package, n: "1,500+", l: "Stock Units" },
+  { icon: Users, n: "50,000+", l: "Corporate Clients" },
+  { icon: Globe, n: "Nationwide", l: "Distribution" },
+  { icon: Calendar, n: "EST 2024", l: "Incorporated" },
 ];
 
 function About() {
   return (
-    <div>
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 gradient-hero"/>
-        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-accent/20 blur-3xl"/>
-        <div className="relative max-w-4xl mx-auto px-6 py-24 text-center text-white">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/20 text-xs font-semibold mb-5">
-            <Heart className="w-3.5 h-3.5 fill-accent text-accent"/> Made in Kenya, for Kenyans
-          </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-5 leading-tight text-balance">
-            Building Kenya's most-loved online store, <span className="bg-gradient-to-r from-accent-glow to-accent bg-clip-text text-transparent">one order at a time.</span>
+    <div className="bg-background">
+      <section className="relative bg-primary text-white py-32 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent opacity-50"/>
+        </div>
+        <div className="relative max-w-5xl mx-auto px-6 text-center">
+          <div className="inline-block px-4 py-1 border border-white/20 text-[10px] uppercase tracking-[0.4em] mb-8 font-bold">Institutional Profile</div>
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 uppercase tracking-tighter leading-none">
+            Advancing Retail <br/>Through Professionalism
           </h1>
-          <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-            BizBoost Market started in a Nairobi apartment with a simple idea — shopping should feel as easy as messaging a friend on WhatsApp.
+          <p className="text-lg text-white/60 max-w-2xl mx-auto font-light leading-relaxed">
+            Bizpoa is a premier online supermarket corporation dedicated to providing high-efficiency procurement solutions for the modern Kenyan household.
           </p>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <section className="max-w-7xl mx-auto px-6 -mt-16 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border shadow-2xl">
           {stats.map((s, i) => (
-            <div key={i} className="bg-card border border-border rounded-2xl p-6 text-center shadow-soft animate-fade-up" style={{ animationDelay: `${i*60}ms`}}>
-              <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center mx-auto mb-3"><s.icon className="w-6 h-6 text-primary-deep"/></div>
-              <div className="text-2xl md:text-3xl font-extrabold text-primary">{s.n}</div>
-              <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{s.l}</div>
+            <div key={i} className="bg-card p-10 text-center animate-fade-up" style={{ animationDelay: `${i*60}ms`}}>
+              <div className="text-4xl font-bold text-primary tracking-tighter mb-2">{s.n}</div>
+              <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">{s.l}</div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-6 py-12 space-y-12">
+      <section className="max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-20 items-center">
         <div>
-          <div className="text-xs uppercase tracking-[0.25em] font-bold text-accent mb-2">Our Story</div>
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-5">From a kibanda dream to thousands of homes</h2>
-          <p className="text-muted-foreground leading-relaxed mb-3">
-            In late 2023, our founder Esther was helping her mum order unga, sukuma, and a kettle from three different shops over WhatsApp. The friction was painful. Why couldn't shopping in Kenya feel as smooth as ordering a Bolt?
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            BizBoost Market is the answer. Curated products, transparent prices in KSh, and checkout right where you already chat — WhatsApp. Pay via M-PESA, cash on delivery, or any way you love. We deliver across Nairobi the same day, and to the rest of Kenya within 1–3 days.
-          </p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 gap-5">
-          <div className="bg-card rounded-3xl p-7 border border-border shadow-soft relative overflow-hidden">
-            <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full gradient-gold opacity-20 blur-2xl"/>
-            <Target className="w-8 h-8 text-primary mb-3"/>
-            <h3 className="font-extrabold text-xl mb-2">Our Mission</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">Make quality products accessible to every Kenyan household, with a checkout that feels as natural as a chat with a friend.</p>
+          <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-primary mb-6">Our Mandate</div>
+          <h2 className="text-4xl font-bold uppercase tracking-tighter mb-8">Corporate History & Strategic Mission</h2>
+          <div className="space-y-6 text-muted-foreground leading-relaxed font-light text-base">
+            <p>
+              Founded in 2024, Bizpoa emerged from a necessity to professionalize the fragmented digital retail landscape in Nairobi. Our primary focus is the elimination of logistical friction and the standardization of quality in the household essentials market.
+            </p>
+            <p>
+              We operate a high-efficiency distribution network that leverages advanced digital interfaces to connect consumers directly with a professionally managed inventory collection. Our commitment is to reliability, transparency, and the highest standards of retail excellence.
+            </p>
           </div>
-          <div className="bg-card rounded-3xl p-7 border border-border shadow-soft relative overflow-hidden">
-            <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-primary opacity-15 blur-2xl"/>
-            <Sparkles className="w-8 h-8 text-accent mb-3"/>
-            <h3 className="font-extrabold text-xl mb-2">Our Vision</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">To be Africa's favourite chat-first storefront — where commerce feels personal, instant, and proudly local.</p>
+        </div>
+        <div className="grid grid-cols-1 gap-px bg-border border border-border">
+          <div className="bg-card p-12">
+            <Target className="w-8 h-8 text-primary mb-6"/>
+            <h3 className="font-bold text-lg uppercase tracking-tight mb-4">Strategic Mission</h3>
+            <p className="text-sm text-muted-foreground font-light leading-relaxed">To optimize the procurement of household essentials through a reliable, scalable, and professional digital framework, ensuring quality at every touchpoint.</p>
+          </div>
+          <div className="bg-card p-12">
+            <Shield className="w-8 h-8 text-primary mb-6"/>
+            <h3 className="font-bold text-lg uppercase tracking-tight mb-4">Quality Assurance</h3>
+            <p className="text-sm text-muted-foreground font-light leading-relaxed">Maintaining a rigorous standard of operational integrity and product verification to foster trust and long-term stability in the digital retail sector.</p>
           </div>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <div className="text-center mb-10">
-          <div className="text-xs uppercase tracking-[0.25em] font-bold text-accent mb-2">The Team</div>
-          <h2 className="text-3xl md:text-4xl font-extrabold">The people behind the magic</h2>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          {team.map((m, i) => (
-            <div key={m.name} className="bg-card border border-border rounded-2xl p-5 text-center shadow-soft hover:-translate-y-1 transition-transform animate-fade-up" style={{ animationDelay: `${i*60}ms`}}>
-              <div className="w-20 h-20 rounded-full mx-auto mb-3 flex items-center justify-center text-white font-extrabold text-xl shadow-glow" style={{ background: m.color }}>{m.initials}</div>
-              <div className="font-bold">{m.name}</div>
-              <div className="text-xs text-muted-foreground mt-0.5">{m.role}</div>
-            </div>
-          ))}
+      <section className="bg-secondary/30 py-32 border-y border-border">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-primary mb-6">Leadership</div>
+            <h2 className="text-4xl font-bold uppercase tracking-tighter">Executive Management</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            {team.map((m, i) => (
+              <div key={m.name} className="bg-card border border-border p-8 text-center animate-fade-up" style={{ animationDelay: `${i*60}ms`}}>
+                <div className="w-24 h-24 bg-primary text-white flex items-center justify-center font-bold text-2xl mb-6 mx-auto">{m.initials}</div>
+                <div className="font-bold uppercase tracking-tight text-sm mb-1">{m.name}</div>
+                <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">{m.role}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <div className="rounded-3xl gradient-hero p-10 sm:p-14 text-center text-white relative overflow-hidden">
-          <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-accent/30 blur-3xl"/>
-          <div className="relative">
-            <h3 className="text-3xl md:text-4xl font-extrabold mb-3">Ready to shop?</h3>
-            <p className="text-white/80 mb-6 max-w-md mx-auto">Discover hundreds of products handpicked for you. Pay how you love.</p>
-            <Link to="/shop" className="inline-flex h-12 px-7 rounded-full gradient-gold text-primary-deep font-bold shadow-gold hover:scale-105 transition-transform items-center">
-              Browse Products
+      <section className="max-w-7xl mx-auto px-6 py-32">
+        <div className="bg-primary p-12 md:p-24 text-center text-white relative overflow-hidden">
+          <div className="relative z-10">
+            <h3 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter mb-8">Establish a Corporate Account</h3>
+            <p className="text-white/60 mb-12 max-w-xl mx-auto font-light">Join thousands of households and corporations that rely on Bizpoa for their procurement needs. Quality and reliability, guaranteed.</p>
+            <Link to="/shop" className="inline-flex h-16 px-12 bg-white text-primary font-bold uppercase tracking-widest text-xs items-center hover:bg-secondary transition-colors">
+              Access Inventory Collection
             </Link>
           </div>
         </div>
       </section>
     </div>
   );
-}
+}
